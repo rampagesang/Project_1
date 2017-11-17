@@ -133,3 +133,16 @@ img {
   color: #EF3B3A;
 }
 
+
+
+
+body .home-static {
+  width: 800px;
+  background-color: #ffffff;
+}
+
+.profile-container {
+  width: 600px;
+  text-align: center;
+  color: #ffffff;
+}

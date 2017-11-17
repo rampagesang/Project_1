@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Insta Diary</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="assets/css/homestyle.css">
+
+  <style>
+  #map {
+    height: 400px;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+  <!---Profile Picture Section -->
+  <div class="profile-container">
+    <div class="photo-wrapper">
+      <label for="user-photo">
+        Profile Photo
+      </label>
+      <div id="profile-photoUpload" class="profile-photoEdit">
+        <button data-control-name="edit_profile_photo" class="profile-photo-edit_edit-btn">
+          <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAAxLAAAAJDMyYTE1NjY4LTdhNTAtNDE4My1hZTVlLTViOGJlMTZiYTYzZA.jpg" class="profile-photo-edit__preview" height="128" width="128">
+        </button>
+      </div>
+    </div>
+  </div>
+  <!---Profile About Me Section -->
+  <div class="section__body">
+    <div id="ember1576" class="pv-top-card-section__information">
+      <div class="display-flex">
+        <h1 class="pv-top-card-section__name">Julia Shin</h1>
+        <h2 class="pv-top-card-section__headline">Marketing Coordinator | Creative Director</h2>
+        <h3 class="section__location">Orange County, California Area</h3>
+
+        <h3 class="pv-top-card-section__connections">
+          <span class="svg-icon-wrap"><span class="visually-hidden">211 friends</span>
+        </h3>
+      </div> 
+      <!---Google Maps Section -->
+      <h3>Places I've Been</h3>
+      <div id="map"></div>
+      <script>
+        function initMap() {
+          var uluru = {lat: -25.363, lng: 131.044};
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
+          });
+          var marker = new google.maps.Marker({
+            position: uluru,
+            map: map
+          });
+        }
+      </script>
+      <!---GOOGLE MAPS API SECTION -->
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8AU-Y_iH5R9Jl08FpmA4QzsU8Tw6KRoQ&callback=initMap">
+    </script>
+
+
+
+
+  </body>
+  </html>
+
+
