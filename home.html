@@ -47,14 +47,19 @@
       <h3>Places I've Been</h3>
       <div id="map"></div>
       <script>
+
+
+        var myLatlng = new google.maps.LatLng(-25.363882,131.044922);
+        var lat = -117.8401397041032
+        var long = 33.644946219683284
         function initMap() {
           var uluru = {lat: -25.363, lng: 131.044};
           var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
-            center: uluru
+            center: myLatlng
           });
           var marker = new google.maps.Marker({
-            position: uluru,
+            position: myLatlng,
             map: map
           });
         }
