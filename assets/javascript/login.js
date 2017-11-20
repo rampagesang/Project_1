@@ -22,18 +22,35 @@ $('#loginButton').on('click', function(event){
 
   firebase.auth().signInWithEmailAndPassword(email, password).then(function(user){
 
-    document.location.href = "Profile.html"
 
+    setTimer()
+
+    document.location.href = "home.html"
     if(user){
       console.log("success : " + user.val().name)
+
     } else {
       console.log("no such user")
     }
   }).catch(function(error) {
    // Handle errors
-  })
+ })
 
 })
+
+
+
+function setTimer() {
+  console.log(document.documentElement.outerHTML)
+  if (document.documentElement.outerHTML === "Welcome.html"){
+    setTimeout(function() {
+      document.location.href = "Profile.html"
+    }, 5000)
+  }
+  
+}
+
+
 
 
 

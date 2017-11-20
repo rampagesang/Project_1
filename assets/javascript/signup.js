@@ -35,16 +35,13 @@ $('#createButton').on('click', function(){
 						password: password
 					})
 
-					document.location.href = "Profile.html"
+					document.location.href = "home.html"
 
 				} else {
 					console.log("can not grab the user")
 				}
 
 			})
-
-
-
 		}).catch(function(error) {
 
 			var errorCode = error.code

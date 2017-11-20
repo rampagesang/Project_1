@@ -40,7 +40,7 @@ img {
   width: 50%;
 }
 .login-page {
-  background-image: url(images/Logo.png);
+  /*background-image: url(images/Logo.png);*/
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
