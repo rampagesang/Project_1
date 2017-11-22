@@ -18,32 +18,36 @@
 </head>
 <body>
 
+
   <!---Profile Picture Section -->
+<header>
+<div class="top-area">
   <div class="profile-container">
-    <div class="photo-wrapper">
-      <label for="user-photo">
-        Profile Photo
-      </label>
-      <div id="profile-photoUpload" class="profile-photoEdit">
-        <button data-control-name="edit_profile_photo" class="profile-photo-edit_edit-btn">
-          <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAAxLAAAAJDMyYTE1NjY4LTdhNTAtNDE4My1hZTVlLTViOGJlMTZiYTYzZA.jpg" class="profile-photo-edit__preview" height="128" width="128">
+      <div class="profile-photo">
+        <!---New Background Image Profile Upload Area -->
+        <input id="test" type="file" onchange="loadImageFile(this)" />
+
+        <!---ACTUAL PROFILE PICTURE UPLOAD AREA -->
+        <button class="profile-photo-btn">
+          <img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAIA_wDGAAAAAQAAAAAAAAxLAAAAJDMyYTE1NjY4LTdhNTAtNDE4My1hZTVlLTViOGJlMTZiYTYzZA.jpg" height="128" width="128" class="photo">
         </button>
-      </div>
     </div>
   </div>
+  </header>
   <!---Profile About Me Section -->
   <div class="section__body">
-    <div id="ember1576" class="pv-top-card-section__information">
-      <div class="display-flex">
-        <h1 class="pv-top-card-section__name">Julia Shin</h1>
-        <h2 class="pv-top-card-section__headline">Marketing Coordinator | Creative Director</h2>
-        <h3 class="section__location">Orange County, California Area</h3>
+        <h1 class="card-section_name">Julia Shin</h1>
+        <h2 class="section_headline">My Lovely Diary of Places I've Traveled</h2>
+        <h3 class="section_location">Orange County, California</h3>
 
-        <h3 class="pv-top-card-section__connections">
-          <span class="svg-icon-wrap"><span class="visually-hidden">211 friends</span>
+        <h3 class="section_connections">
+          <span class="visually-hidden">211 friends</span>
         </h3>
-      </div> 
-      <!---Google Maps Section -->
+  </div>
+</div>
+
+     <!---Google Maps Section -->
+    <div class="map-area">
       <h3>Places I've Been</h3>
       <div id="map"></div>
       <script>
@@ -153,6 +157,7 @@
 
       }
     </script>
+
     <!---GOOGLE MAPS API SECTION -->
     <script async defer
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBDIgfM9PCnLI_koxi20OA2EqB_8yKiu4&callback=initMap">
@@ -162,7 +167,9 @@
     <div class="panel-body">
       <button class="btn btn-danger" type="submit" id="addJourney">Add Your Journey</button>
     </div>
+  </div>
 
+  
 </body>
 
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>

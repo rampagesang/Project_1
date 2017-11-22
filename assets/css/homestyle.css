@@ -1,38 +1,72 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed);
 
 body {
     
-    background-image: url(images/road.jpg);
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-attachment: fixed;
-    width: 100%px;
+  background-image: url(images/road.jpg);
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-attachment: fixed;
+  width: 100%;
+  font-family: 'Barlow Semi Condensed', sans-serif;;
+  -webkit-font-smoothing: antialiased;
+}
 
-/*  background: #376ec6
-    background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-    background: -moz-linear-gradient(right, #76b852, #8DC26F);
-    background: -o-linear-gradient(right, #76b852, #8DC26F);
-    background: linear-gradient(to left, #76b852, #8DC26F);
-    font-family: "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;      */
+header {
+  text-align: center;
+  padding: 50px 0 0 0;
+  margin: 20px auto 0;
+  background-image: url(images/road.jpg);
+  z-index: 1;
+  width: 900px;
+  height: 300px;
+  box-shadow: 2px 2px #ccc
 }
 
 .profile-container {
-  text-align: center;
-  margin: auto;
-  padding: 60px 0 0 0;
-  background-color: #dfdfdf;
-  z-index: 1;
-  width: 900px;
+  margin: 150px;
+  background: none;
 }
+
 .section__body {
   z-index: 1;
-  background: #dfdfdf;
+  background: #ffffff;
   max-width: 900px;
   margin: 0 auto 100px;
-  margin: 0 auto 100px;
-  padding: 45px;
+  margin: 0 auto;
+  padding: 45px 0 10px 0;
   text-align: center;
+  box-shadow: 2px 2px 1px #cccccc;
+}
+
+.photo {
+  border-radius: 50%;
+}
+
+.profile-photo-btn {
+  border-radius: 50%;
+}
+
+.top-area {
+  width: 900px;
+  text-align: center
+  margin: 0 auto 100px;
+  margin: 0 auto 100px;
+}
+
+.map-area {
+ width: 900px;
+ text-align: center;
+ margin: 0 auto 100px;
+ margin: 0 auto 100px;
+ background-color: #fff;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  display: none;
 }
 
