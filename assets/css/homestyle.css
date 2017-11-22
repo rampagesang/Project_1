@@ -2,7 +2,6 @@
 
 body {
     
-<<<<<<< HEAD
   background-image: url(images/road.jpg);
   background-repeat: no-repeat;
   background-position: center top;
@@ -10,22 +9,7 @@ body {
   width: 100%;
   font-family: 'Barlow Semi Condensed', sans-serif;;
   -webkit-font-smoothing: antialiased;
-=======
-    /*background-image: url(images/road.jpg);*/
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-attachment: fixed;
-    width: 100%px;
 
-/*  background: #376ec6
-    background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-    background: -moz-linear-gradient(right, #76b852, #8DC26F);
-    background: -o-linear-gradient(right, #76b852, #8DC26F);
-    background: linear-gradient(to left, #76b852, #8DC26F);
-    font-family: "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;      */
->>>>>>> 7e417d91f4c1d7c420bd91c77f3a8cc8ea9082cc
 }
 
 header {
