@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed);
 
 body {
-    
-  /*background-image: url(images/road.jpg);*/
+
+  background-image: url(images/road.jpg);
   background-repeat: no-repeat;
   background-position: center top;
   background-attachment: fixed;
@@ -16,59 +16,94 @@ h1, h2, h3 {
   font-family: 'Barlow Semi Condensed', sans-serif;;
 }
 
-header {
+
+.top-area {
+  margin: 0 auto 100px;
+  margin: 20px auto 0;
   text-align: center;
   padding: 50px 0 0 0;
-  margin: 20px auto 0;
-  background-image: url(images/road.jpg);
-  z-index: 1;
-  width: 1000px;
+  background-image: url(images/default-profile-bg.jpg);
   height: 300px;
-  box-shadow: 2px 2px #ccc
+  box-shadow: 1px 1px #ccc;
 }
 
-.profile-container {
-  margin: 150px;
-  background: none;
-}
-#uploadButton{
-  position: absolute;
-  top: 300px;
-  right: 260px;
-}
-.section__body {
+
+
+.profile-btn {
+  border-radius: 50%;
+  position: relative;
   z-index: 1;
-  background: #ffffff;
-  max-width: auto;
-  margin: 0 auto 100px;
-  margin: 0 auto;
-  padding: 45px 0 10px 0;
+  margin-top: 170px;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  vertical-align: middle;
   text-align: center;
-  /*box-shadow: 2px 2px 1px #cccccc;*/
+  color: transparent;
+  transition: all .3s ease;
+  text-decoration: none;
+  position: relative;
+    z-index: 1;
 }
 
 .photo {
   border-radius: 50%;
 }
 
-.profile-photo-btn {
-  border-radius: 100px ;
+.section__body {
+  z-index: 1;
+  background: #ffffff;
+  margin: 0 auto 100px;
+  margin: 0 auto;
+  padding: 45px 0 10px 0;
+  text-align: center;
 }
 
-.top-area {
-  width: 900px;
-  text-align: center
-  margin: 0 auto 100px;
-  margin: 0 auto 100px;
-}
 
 .map-area {
- width: 900px;
- text-align: center;
- background-color: #fff;
+  text-align: center;
+  background-color: #fff;
   margin: 0 auto 100px;
-  margin: 0 auto 100px;
+  margin: 0 auto;
 }
+
+#map {
+  height: 400px;
+}
+
+/*          blog post area edit       */
+.blog-post-display {
+
+  background: #ffffff;
+  margin-top: 20px;
+  padding: 10px 0 40px 0;
+  text-align: center;
+  height: 350px;
+}
+
+.blog-post-display .post-thumb {
+  float: left;
+  padding: 20px;
+}
+
+
+
+  /*==========================================================*/
+
+#uploadButton{
+  position: absolute;
+  top: 300px;
+  right: 260px;
+}
+
+
+
 
 .inputfile {
   width: 0.1px;
@@ -79,35 +114,4 @@ header {
   display: none;
 }
 
-#map {
-  height: 400px;
-  width: 100%;
-}
 
-.profile-pic {
-    border-radius: 50%;
-    height: 150px;
-    width: 150px;
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: multiply;
-    vertical-align: middle;
-    text-align: center;
-    color: transparent;
-    transition: all .3s ease;
-    text-decoration: none;
-}
-
-.profile-pic:hover {
-    background-color: rgba(0,0,0,.5);
-    z-index: 10000;
-    color: #fff;
-    transition: all .3s ease;
-    text-decoration: none;
-}
-
-.profile-pic span {
-    display: inline-block;
-    padding-top: 4.5em;
-    padding-bottom: 4.5em;
-}
