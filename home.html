@@ -11,6 +11,7 @@
 </head>
 <body>
 <header>
+  <!-- navigation -->
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container"> 
         <div class="navbar-header">
@@ -80,6 +81,7 @@
 </div>
 </header>
   <!---Profile Picture Section -->
+
   <div class="container">
     <div class="row">
       <div class="col-sm-1">
@@ -127,6 +129,7 @@
     <div class="col-md-10">
       <div class="map-area">
         <h3>Places I've Been</h3>
+        <br><br>
         <div id="map"></div>
         <script>
 
@@ -237,6 +240,7 @@
       <hr><br>
 
 <!-- +++++++++++++++++++++++++++++++ BLOG POSTS START HERE ++++++++++++++++++++++++++++++ -->
+
 <div class="container">
   <div class="row">
     <div class="col-sm-1">
@@ -278,32 +282,7 @@
             </div>
           </div>
 </body>
-    <!---   JQUERY FOR UPLOADING NEW BG IMAGE-->
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-
-     $(switchBackground);
-     var oFReader = new FileReader(),
-     rFilter = /^(?:image\/bmp|image\/cis\-cod|image\/gif|image\/ief|image\/jpeg|image\/jpeg|image\/jpeg|image\/pipeg|image\/png|image\/svg\+xml|image\/tiff|image\/x\-cmu\-raster|image\/x\-cmx|image\/x\-icon|image\/x\-portable\-anymap|image\/x\-portable\-bitmap|image\/x\-portable\-graymap|image\/x\-portable\-pixmap|image\/x\-rgb|image\/x\-xbitmap|image\/x\-xpixmap|image\/x\-xwindowdump)$/i;
-
-     oFReader.onload = function(oFREvent) {
-      localStorage.setItem('b', oFREvent.target.result);
-      switchBackground();
-    };
-
-    function switchBackground() {
-      $("header").css('background-image', "url(" + localStorage.getItem('b') + ')');    
-    }
-
-    function loadImageFile(testEl) {
-      if (! testEl.files.length) { return; }
-      var oFile = testEl.files[0];
-      if (!rFilter.test(oFile.type)) { alert("You must select a valid image file!"); return; }
-      oFReader.readAsDataURL(oFile);
-    }
-  </script>
- -->
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
