@@ -4,7 +4,7 @@
 
 body {
 
-	background-image: url(images/road_copy.jpg);
+	background-image: url();
 	background-repeat: no-repeat;
 	background-position: center top;
 	background-attachment: fixed;
@@ -27,8 +27,8 @@ img {
 
 
 .jumbotron {
-	background-color: black;
-	color: white;
+	background-color: white;
+	color: black;
 }
 
 
