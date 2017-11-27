@@ -1,12 +1,4 @@
 
-
-
-/*var map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 4,
-  center: markerLocation
-})*/
-
-var marker
 /*
 
 google.maps.event.addListener(marker, 'dragend', function (event) {
@@ -15,4 +7,5 @@ google.maps.event.addListener(marker, 'dragend', function (event) {
 });*/
 
 //new google.maps.event.trigger( marker, 'click' )
+
 

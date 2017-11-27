@@ -37,6 +37,8 @@
           var markerLocation
           var mapDrawPolylineCoordinates = []
           var newMap
+          var locationCounter = 0
+          
 
           function initMap() {
 
@@ -64,119 +66,97 @@
 
             getLocation()
 
-          // Styles a map in night mode.
-          newMap = new google.maps.Map(document.getElementById('map_editing'), {
-            center: {lat: 40.674, lng: -73.945},
-            zoom: 12,
-            styles: [
-            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-            {
-              featureType: 'administrative.locality',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'poi',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'geometry',
-              stylers: [{color: '#263c3f'}]
-            },
-            {
-              featureType: 'poi.park',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#6b9a76'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry',
-              stylers: [{color: '#38414e'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#212a37'}]
-            },
-            {
-              featureType: 'road',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#9ca5b3'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry',
-              stylers: [{color: '#746855'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'geometry.stroke',
-              stylers: [{color: '#1f2835'}]
-            },
-            {
-              featureType: 'road.highway',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#f3d19c'}]
-            },
-            {
-              featureType: 'transit',
-              elementType: 'geometry',
-              stylers: [{color: '#2f3948'}]
-            },
-            {
-              featureType: 'transit.station',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#d59563'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'geometry',
-              stylers: [{color: '#17263c'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.fill',
-              stylers: [{color: '#515c6d'}]
-            },
-            {
-              featureType: 'water',
-              elementType: 'labels.text.stroke',
-              stylers: [{color: '#17263c'}]
-            }
-            ]
-          })
-
-/*            var controlDiv = document.createElement('div')
-            var finishEditingButton = document.createElement('button')
-            finishEditingButton.style.cursor = 'pointer'
-            finishEditingButton.style.text = "Finish"
-            finishEditingButton.style.backgroundColor = 'white'
-            finishEditingButton.style.title = 'Finished Editing'
-            finishEditingButton.style.height = '40px'
-            finishEditingButton.style.width = '40px'
-            finishEditingButton.style.marginLeft = '10px'
-            finishEditingButton.style.marginTop = '10px'
-            controlDiv.appendChild(finishEditingButton)
-
-            var finishButton = $('<button>')
-            .addClass('btn btn-danger')
-            .attr('type', 'submit')
-            .attr('id', 'EditFinished')
-            .text('Finished')
-
-            newMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(controlDiv)*/
-
-
-            
+            // Styles a map in night mode.
+            newMap = new google.maps.Map(document.getElementById('map_editing'), {
+              center: {lat: 40.674, lng: -73.945},
+              zoom: 12,
+              styles: [
+              {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+              {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+              {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+              {
+                featureType: 'administrative.locality',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#d59563'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#d59563'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'geometry',
+                stylers: [{color: '#263c3f'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#6b9a76'}]
+              },
+              {
+                featureType: 'road',
+                elementType: 'geometry',
+                stylers: [{color: '#38414e'}]
+              },
+              {
+                featureType: 'road',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#212a37'}]
+              },
+              {
+                featureType: 'road',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#9ca5b3'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry',
+                stylers: [{color: '#746855'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#1f2835'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#f3d19c'}]
+              },
+              {
+                featureType: 'transit',
+                elementType: 'geometry',
+                stylers: [{color: '#2f3948'}]
+              },
+              {
+                featureType: 'transit.station',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#d59563'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'geometry',
+                stylers: [{color: '#17263c'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#515c6d'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.stroke',
+                stylers: [{color: '#17263c'}]
+              }
+              ]
+            })
 
 
             google.maps.event.addListener(newMap, "click", function (event) {
 
               if (isFinishedEdit === false) {
+                
                 var latLng = event.latLng
                 var lat = latLng.lat()
                 var long = latLng.lng()
@@ -184,11 +164,14 @@
                 markerLocation = {lat: lat, lng: long}
 
                 if(confirm("Do you want to add a marker on this particular location?")){
-                  new google.maps.Marker({
+                  locationCounter += 1
+                  var marker = new google.maps.Marker({
                     position: markerLocation,
                     map: newMap,
-                    title: 'Hello World!'
+                    title: "Location Property"
                   })
+
+                  marker.set('label', ''+locationCounter)
 
                   locationLists.push({lat: lat, long: long})
 
@@ -210,66 +193,297 @@
           
           
           $(document).ready(function() {
+            $('#addedPhotoContainer').hide()
+
+
             $('#didFinishedEditing').on('click', function(event){
-            //event.preventDefault()
-
-            console.log("does it come here?")
-
-            if(isFinishedEdit === true){
-              isFinishedEdit = false
-              $('#didFinishedEditing').text('Finished')
-              console.log("adding")
 
 
-            } else {
+                $('#locationNum').empty()
+                for(var i=0; i < locationLists.length; i++){
+                  $('#locationNum').append($('<option>').text(i+1))
+                }
+                //event.preventDefault()
 
-              var path = new google.maps.Polyline({
-                path: mapDrawPolylineCoordinates,
-                geodesic: true,
-                strokeColor: '#FF0000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2
-              })
+                console.log("does it come here?")
 
-              path.setMap(newMap)
+                if(isFinishedEdit === true){
+                  isFinishedEdit = false
+                  $('#didFinishedEditing').text('Finished')
+                  console.log("adding")
 
-              isFinishedEdit = true
-              console.log("finished")
-              $('#didFinishedEditing').text('Edit')
-
-              firebase.auth().onAuthStateChanged(function(user){
-                console.log(user.uid)
-
-                if(user) {
-
-                  database.ref('/user/'+user.uid).once('value', function(children){
-                    if(children.hasChild('blogs')){
-                      console.log("it does has child named blogs")
-                      database.ref('/user/'+user.uid+'blogs').on('value', function(value){
-                        console.log("****************************************************************************************************")
-                        database.ref('/user/'+user.uid+"/blogs/" + value.numChildren()+1 ).push({
-                            oneLocation: locationLists
-                        })
-                        console.log("****************************************************************************************************")
-                        
-                      })
-                      
-                    } else {
-                      console.log("it does NOT NOT has child named blogs")
-                      
-                      database.ref('/user/'+user.uid+"/blogs/" + 00).push({
-                          oneLocation: locationLists
-                      })
-                    }
-
-                  })
 
                 } else {
-                  console.log("can not grab the user")
+
+                  var path = new google.maps.Polyline({
+                    path: mapDrawPolylineCoordinates,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                  })
+
+                  path.setMap(newMap)
+
+                  isFinishedEdit = true
+                  console.log("finished")
+                  $('#didFinishedEditing').text('Edit')
+
+                  
                 }
+            })
+
+
+            $('#addPhotoAndDescription').on('click', function(event){
+              event.preventDefault()
+
+
+              $('#addedPhotoContainer').show()
+
+              var photoObject = {
+                imageData: imgFile,
+                locationIndex: ($('#locationNum').val()-1),
+                description: $('#textareaID').val()
+              }
+
+
+              imgArray.push(photoObject)
+
+              for(var i = 0; i < locationLists.length; i++){
+                if(photoObject.locationIndex === i){
+                  // need to fixed to be able to add multiple photos @ same location
+                  if(locationLists[i].photo_1 == null || locationLists[i].photo_1 == undefined){
+                    locationLists[i].photo_1 = photoObject
+                    console.log(locationLists)
+                  } else {
+                    locationLists[i].photo_2 = photoObject
+                    console.log(locationLists)
+                  }
+                  
+                }
+              }
+
+              
+
+              $('#previewOfAddedPhotoContainer')
+                .append($('<container>')
+                  .append($('<row>')
+                    .append($('<div>')
+                      .addClass('col-lg-4')
+                      .addClass('text-center')
+                      .append($('<img>')
+                        .attr('src',reader.result)
+                        .attr('height', '300px')
+                        .attr('width','300px'))
+                      .append($('<div>')
+                        .append($('<p>')
+                          .text("Description: " + $('#textareaID').val()))
+                        .append($('<p>')
+                          .text("Location Index is " + $('#locationNum').val()))))))
+
+
+
+              $('#preview').attr('src', 'https://media.giphy.com/media/OQemfICSHDAly/giphy.gif')
+              $('#gettingImgFile').val('')
+              $('#textareaID').val('')
+
+            })
+
+
+
+            $('#uploadPhotos').on('click', function(){
+
+              firebase.auth().onAuthStateChanged(function(user){
+
+                    if(user) {
+
+
+
+                      var whichBlogNum
+                      
+                      database.ref('/user/'+user.uid).once('value', function(children){
+                        if(children.hasChild('blogs')){
+                          console.log("it does has child named blogs")
+                          database.ref('/user/'+user.uid+'/blogs/').once('value', function(value){
+                            //var keys = Object.keys(value)
+                            //console.log('keys = ' + keys.join(', '))
+                            //console.log("****************************************************************************************************")
+                            //console.log(value)
+                            var numberOfChildren = value.numChildren()
+                            whichBlogNum = numberOfChildren+1
+
+                            database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1) ).set({
+                                Locations: locationLists
+                            })
+                            //console.log("****************************************************************************************************")
+
+                          })
+                          
+                        } else {
+                          console.log("it does NOT NOT has child named blogs")
+                          
+                          database.ref('/user/'+user.uid+"/blogs/" + 1).set({
+                              Locations: locationLists
+                          })
+                        }
+
+                      })
+
+
+
+
+                      for(var i = 0; i < locationLists.length; i++){
+
+                        if(locationLists[i].photo_1 != null || locationLists[i].photo_1 != undefined){
+                          console.log(locationLists[i])
+                          var imageFile = locationLists[i].photo_1.imageData
+                          delete locationLists[i].photo_1.imageData
+
+                          uploadImageAsPromise(imageFile, i, user.uid, 1)
+
+                          if(locationLists[i].photo_2 != null || locationLists[i].photo_2 != undefined){
+                            var secondImgFile = locationLists[i].photo_2.imageData
+                            delete locationLists[i].photo_2.imageData
+                            uploadImageAsPromise(secondImgFile, i, user.uid, 2)
+                          }
+                        }
+
+                      }
+
+                      /*for(var i = 0; i < imgArray.length; i++){
+
+                        var imageFile = imgArray[i].imageData
+
+                        uploadImageAsPromise(imageFile, i, user.uid)
+
+                      }*/
+
+                      function uploadImageAsPromise (imageFile, index, uid, firOrSec) {
+                          return new Promise(function (resolve, reject) {
+
+                            var storageRef = firebase.storage().ref('/' + uid + '/Photo_Stack/' + imageFile.name)
+                            var uploadTask = storageRef.put(imageFile)
+
+
+                            uploadTask.on('state_changed', function(snapshot){
+
+                              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                              console.log('Upload is ' + progress + '% done')
+
+                              switch (snapshot.state) {
+                                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                                  console.log('Upload is paused')
+                                  break;
+                                case firebase.storage.TaskState.RUNNING: // or 'running'
+                                  console.log('Upload is running')
+                                  break;
+                              }
+                            }, function(error) {
+                                switch (error.code) {
+                                  case 'storage/unauthorized':
+                                    console.log('User doesn\'t have permission to access the object')
+                                    break
+
+                                  case 'storage/canceled':
+                                    console.log('User canceled the upload')
+                                    break
+
+                                  case 'storage/unknown':
+                                    console.log('Unknown error occurred, inspect error.serverResponse')
+                                    break
+                                }
+                            }, function() {
+                                // IMPORTANT NOTE!!!
+                                /* For the first blog, firebase takes time to creating data structure
+                                  Therefore, we do not know where to upload so we are assuming that this is first time we ever upload photo blog
+                                  so we put first index into whichBlogNum = 1 so that it knows where to put
+
+                                */
+                                //--------------------------------------------------------------//
+                                if(whichBlogNum === undefined){
+                                    whichBlogNum = 1
+                                }
+                                //--------------------------------------------------------------//
+
+
+                                var downloadURL = uploadTask.snapshot.downloadURL
+                                if(firOrSec === 1) {
+                                  locationLists[index].photo_1.imgFileURL = downloadURL
+
+                                  database.ref('/user/'+ user.uid).child('blogs').child(''+whichBlogNum).child('Locations').child(''+index).child('photo_1').set({
+                                    locationIndex: index,
+                                    description:locationLists[index].photo_1.description,
+                                    imgFileURL: downloadURL
+
+                                  })
+                                } else {
+                                  locationLists[index].photo_2.imgFileURL = downloadURL
+                                  database.ref('/user/'+ user.uid).child('blogs').child(''+whichBlogNum).child('Locations').child(''+index).child('photo_2').set({
+                                    locationIndex: index,
+                                    description:locationLists[index].photo_2.description,
+                                    imgFileURL: downloadURL
+                                  })
+                                }
+                            })
+                            
+                          })
+                      }
+
+
+                    } else {
+                      console.log("can not grab the user")
+                    }
               })
+
+
+
+
+              
+
+            })
+
+
+
+
+            var imgFile
+            var imgURL
+            var reader
+            var imgArray = []
+
+            $('#gettingImgFile').on('change', previewFile)
+
+            function previewFile() {
+              var preview = document.querySelector('img')
+              imgFile = document.querySelector('input[type=file]').files[0]
+              console.log(imgFile.name)
+              reader= new FileReader()
+
+
+              reader.addEventListener('load', function() {
+                $('#preview').attr('src', reader.result)
+              }, false)
+
+              if(imgFile){
+                //imgURL = reader.readAsDataURL(imgFile)
+                reader.readAsDataURL(imgFile)
+                
+              } 
             }
-          })
+
+
+
+
+            var textarea = document.querySelector('textarea');
+
+            textarea.addEventListener('keydown', autosize);
+                         
+            function autosize(){
+              var el = this;
+              setTimeout(function(){
+                el.style.cssText = 'height:auto; padding:0';
+                el.style.cssText = 'height:' + el.scrollHeight + 'px';
+              },0);
+            }
 
 
           })
@@ -283,28 +497,66 @@
     </div>
 
 
-    <div class="panel panel-default">
-      <div class="panel-heading boxColor">
+
+    
+
+    <div class="panel panel-default" id="previewPhotoContainer">
+      <div class="panel-heading">
         <h3 class="panel-title text-center">Add Description</h3>
       </div>
       <div class="panel-body">
+
         <div class="form-group">
-          <label for="trainName">Train Name</label>
-          <input type="text" class="form-control" id="trainName">
+          <label for="locationNum">
+            Location Index
+          </label>
+          <select class="form-control" id="locationNum">
+            
+          </select>
         </div>
+
+        <div class="text-center">
+          <div class="form-group">
+            <label class="upload-group">
+              Photo Upload
+            </label>
+
+            <br>
+            <img src="https://media.giphy.com/media/OQemfICSHDAly/giphy.gif" height="300" width="300" id="preview">
+            <input type="file" name="photos" id="gettingImgFile" >
+          </div>
+        </div>
+
         <div class="form-group">
-          <label for="destination">Destination</label>
-          <input type="text" class="form-control" id="destination">
+          <label>
+            Description
+          </label>
+
+          <br>
+          <textarea name="Photo Description" id="textareaID"></textarea>
+          
         </div>
-        <div class="form-group">
-          <label for="firstTrainTime">First Train Time(HH:mm - military time)</label>
-          <input type="text" class="form-control" id="firstTrainTime">
+
+
+        <div class="text-center">
+          <button class="btn btn-danger" id="addPhotoAndDescription">Add</button>
+
         </div>
-        <div class="form-group">
-          <label for="frequency">Frequency(min)</label>
-          <input type="text" class="form-control" id="frequency">
-        </div>
-        <button class="btn btn-danger" type="submit" id="addButton">Submit</button>
+        
+      </div>
+    </div>
+
+
+
+    <div class="panel panel-default" id="addedPhotoContainer">
+      <div class="panel-heading">
+        <h3 class="panel-title text-center">Added Photos & Description</h3>
+      </div>
+      <div class="panel-body" id="previewOfAddedPhotoContainer">
+
+      </div>
+      <div class="text-center" id="finalButton">
+        <button class="btn btn-danger" id="uploadPhotos">Upload Your Journey</button>
       </div>
     </div>
 
@@ -315,13 +567,8 @@
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBDIgfM9PCnLI_koxi20OA2EqB_8yKiu4&callback=initMap">
 </script>
+<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-database.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
 <script src="assets/javascript/firebase.js"></script>
-<script src="assets/javascript/google.js"></script>
-<!-- <script src="assets/javascript/home.js"></script> -->
 <script type="assets/javascript/journey.js"></script>
 </html>
