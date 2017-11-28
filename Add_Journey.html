@@ -1,637 +1,672 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>New Journey is adding</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="assets/css/journey.css">
+    <head>
+      <title>New Journey is adding</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="assets/css/journey.css">
+    </head>
 
-
-</head>
-<body>
-  <header>
-    <!-- Navigation bar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container"> 
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span> 
-          </button>
-          <a target="_blank" href="#" class="navbar-brand">Diary</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="Add_Journey.html">Map</a></li>
-            <li ><a href="home.html">Profile</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <span class="glyphicon glyphicon-user"></span> 
-                <strong>  Julia Shin</strong>
-                <span class="glyphicon glyphicon-chevron-down"></span>
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <div class="navbar-login">
-                    <div class="row">
-                      <div class="col-lg-4">
-                        <p class="text-center">
-                          <span class="glyphicon glyphicon-user icon-size"></span>
-                        </p>
+    <body>
+      <header>
+        <!-- Navigation bar -->
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+          <div class="container"> 
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span> 
+              </button>
+              <a target="_blank" href="#" class="navbar-brand">Diary</a>
+            </div>
+            <div class="collapse navbar-collapse">
+              <ul class="nav navbar-nav">
+                <li><a href="Add_Journey.html">Map</a></li>
+                <li ><a href="home.html">Profile</a></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-user"></span> 
+                    <strong>  Julia Shin</strong>
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <div class="navbar-login">
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <p class="text-center">
+                              <span class="glyphicon glyphicon-user icon-size"></span>
+                            </p>
+                          </div>
+                          <div class="col-lg-8">
+                            <p class="text-left"><strong>Julia Shin</strong></p>
+                            <p class="text-left small">somerandom@email.com</p>
+                            <p class="text-left">
+                              <a href="settings.html" class="btn btn-primary btn-block btn-sm">Update</a>
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-lg-8">
-                        <p class="text-left"><strong>Julia Shin</strong></p>
-                        <p class="text-left small">somerandom@email.com</p>
-                        <p class="text-left">
-                          <a href="settings.html" class="btn btn-primary btn-block btn-sm">Update</a>
-                        </p>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                      <div class="navbar-login navbar-login-session">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <p>
+                              <a href="#" class="btn btn-danger btn-block">Log Out</a>
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <div class="navbar-login navbar-login-session">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <p>
-                          <a href="#" class="btn btn-danger btn-block">Log Out</a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                    </li>
+                  </ul>
                 </li>
               </ul>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </header>
-  <br><br><br><br>
+      </header>
+      <br><br><br><br>
 
-  <!-- jumbotron header -->
-  <div class='container'>
-    <div class="jumbotron text-center">
-      <h1>Spread Your Journey To The World!</h1>
-      <p>Extraordinary</p>
-    </div>
+      <!-- jumbotron header -->
+      <div class='container'>
+        <div class="jumbotron text-center">
+          <h1>Spread Your Journey To The World!</h1>
+          <p>Extraordinary</p>
+        </div>
 
 
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title text-center">Map Edit</h3>
-      </div>
-      
-      <div class="panel-body" id="map_editing">
-        <script>
-
-
-          var isFinishedEdit = false
-          var currentLat
-          var currentLng
-          var locationLists = []
-          var markerLocation
-          var mapDrawPolylineCoordinates = []
-          var newMap
-          var locationCounter = 0
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center">Map Edit</h3>
+          </div>
           
-
-          function initMap() {
-
-
-            function getLocation() {
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
-              } else {
-                console.log("not getting location")
-              }
-            }
+          <div class="panel-body" id="map_editing">
+            <script>
 
 
-            function showPosition(position) {
-              currentLat = position.coords.latitude
-              currentLng = position.coords.longitude
-              console.log(currentLat + " " + currentLng)
+              var isFinishedEdit = false
+              var currentLat
+              var currentLng
+              var locationLists = []
+              var markerLocation
+              var markers = []
+              var path
+              var mapDrawPolylineCoordinates = []
+              var newMap
+              var locationCounter = 0
+              var whichBlogNum
 
-              var curLocMap = new google.maps.LatLng(currentLat,currentLng)
+              var imgFile
+              var imgURL
+              var reader
+              var imgArray = []
+              
 
-              newMap.setCenter(curLocMap)
-              newMap.setZoom(12)
-
-            }
-
-            getLocation()
-
-            // Styles a map in night mode.
-            newMap = new google.maps.Map(document.getElementById('map_editing'), {
-              center: {lat: 40.674, lng: -73.945},
-              zoom: 12,
-              styles: [
-              {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-              {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-              {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
-              {
-                featureType: 'administrative.locality',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#d59563'}]
-              },
-              {
-                featureType: 'poi',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#d59563'}]
-              },
-              {
-                featureType: 'poi.park',
-                elementType: 'geometry',
-                stylers: [{color: '#263c3f'}]
-              },
-              {
-                featureType: 'poi.park',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#6b9a76'}]
-              },
-              {
-                featureType: 'road',
-                elementType: 'geometry',
-                stylers: [{color: '#38414e'}]
-              },
-              {
-                featureType: 'road',
-                elementType: 'geometry.stroke',
-                stylers: [{color: '#212a37'}]
-              },
-              {
-                featureType: 'road',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#9ca5b3'}]
-              },
-              {
-                featureType: 'road.highway',
-                elementType: 'geometry',
-                stylers: [{color: '#746855'}]
-              },
-              {
-                featureType: 'road.highway',
-                elementType: 'geometry.stroke',
-                stylers: [{color: '#1f2835'}]
-              },
-              {
-                featureType: 'road.highway',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#f3d19c'}]
-              },
-              {
-                featureType: 'transit',
-                elementType: 'geometry',
-                stylers: [{color: '#2f3948'}]
-              },
-              {
-                featureType: 'transit.station',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#d59563'}]
-              },
-              {
-                featureType: 'water',
-                elementType: 'geometry',
-                stylers: [{color: '#17263c'}]
-              },
-              {
-                featureType: 'water',
-                elementType: 'labels.text.fill',
-                stylers: [{color: '#515c6d'}]
-              },
-              {
-                featureType: 'water',
-                elementType: 'labels.text.stroke',
-                stylers: [{color: '#17263c'}]
-              }
-              ]
-            })
+              function initMap() {
 
 
-            google.maps.event.addListener(newMap, "click", function (event) {
-
-              if (isFinishedEdit === false) {
-                
-                var latLng = event.latLng
-                var lat = latLng.lat()
-                var long = latLng.lng()
-                console.log(lat + " " + long)
-                markerLocation = {lat: lat, lng: long}
-
-                if(confirm("Do you want to add a marker on this particular location?")){
-                  locationCounter += 1
-                  var marker = new google.maps.Marker({
-                    position: markerLocation,
-                    map: newMap,
-                    title: "Location Property"
-                  })
-
-                  marker.set('label', ''+locationCounter)
-
-                  locationLists.push({lat: lat, long: long})
-
-                  var curLocMap = new google.maps.LatLng(lat,long)
-
-                  mapDrawPolylineCoordinates.push(curLocMap)
-                  console.log(locationLists)
-
-
-                }
-
-              } else {
-
-              }
-
-            })
-          }
-
-          
-          
-          $(document).ready(function() {
-            $('#addedPhotoContainer').hide()
-
-
-            $('#didFinishedEditing').on('click', function(event){
-
-
-                $('#locationNum').empty()
-                for(var i=0; i < locationLists.length; i++){
-                  $('#locationNum').append($('<option>').text(i+1))
-                }
-                //event.preventDefault()
-
-                console.log("does it come here?")
-
-                if(isFinishedEdit === true){
-                  isFinishedEdit = false
-                  $('#didFinishedEditing').text('Finished')
-                  console.log("adding")
-
-
-                } else {
-
-                  var path = new google.maps.Polyline({
-                    path: mapDrawPolylineCoordinates,
-                    geodesic: true,
-                    strokeColor: '#FF0000',
-                    strokeOpacity: 1.0,
-                    strokeWeight: 2
-                  })
-
-                  path.setMap(newMap)
-
-                  isFinishedEdit = true
-                  console.log("finished")
-                  $('#didFinishedEditing').text('Edit')
-
-                  
-                }
-            })
-
-
-            $('#addPhotoAndDescription').on('click', function(event){
-              event.preventDefault()
-
-
-              $('#addedPhotoContainer').show()
-
-              var photoObject = {
-                imageData: imgFile,
-                locationIndex: ($('#locationNum').val()-1),
-                description: $('#textareaID').val()
-              }
-
-
-              imgArray.push(photoObject)
-
-              for(var i = 0; i < locationLists.length; i++){
-                if(photoObject.locationIndex === i){
-                  // need to fixed to be able to add multiple photos @ same location
-                  if(locationLists[i].photo_1 == null || locationLists[i].photo_1 == undefined){
-                    locationLists[i].photo_1 = photoObject
-                    console.log(locationLists)
+                function getLocation() {
+                  if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
                   } else {
-                    locationLists[i].photo_2 = photoObject
-                    console.log(locationLists)
+                    console.log("not getting location")
                   }
-                  
                 }
+
+
+                function showPosition(position) {
+                  currentLat = position.coords.latitude
+                  currentLng = position.coords.longitude
+                  console.log(currentLat + " " + currentLng)
+
+                  var curLocMap = new google.maps.LatLng(currentLat,currentLng)
+
+                  newMap.setCenter(curLocMap)
+                  newMap.setZoom(12)
+
+                }
+
+                getLocation()
+
+                // Styles a map in night mode.
+                newMap = new google.maps.Map(document.getElementById('map_editing'), {
+                  center: {lat: 40.674, lng: -73.945},
+                  zoom: 12,
+                  styles: [
+                  {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+                  {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+                  {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+                  {
+                    featureType: 'administrative.locality',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#d59563'}]
+                  },
+                  {
+                    featureType: 'poi',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#d59563'}]
+                  },
+                  {
+                    featureType: 'poi.park',
+                    elementType: 'geometry',
+                    stylers: [{color: '#263c3f'}]
+                  },
+                  {
+                    featureType: 'poi.park',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#6b9a76'}]
+                  },
+                  {
+                    featureType: 'road',
+                    elementType: 'geometry',
+                    stylers: [{color: '#38414e'}]
+                  },
+                  {
+                    featureType: 'road',
+                    elementType: 'geometry.stroke',
+                    stylers: [{color: '#212a37'}]
+                  },
+                  {
+                    featureType: 'road',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#9ca5b3'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'geometry',
+                    stylers: [{color: '#746855'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'geometry.stroke',
+                    stylers: [{color: '#1f2835'}]
+                  },
+                  {
+                    featureType: 'road.highway',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#f3d19c'}]
+                  },
+                  {
+                    featureType: 'transit',
+                    elementType: 'geometry',
+                    stylers: [{color: '#2f3948'}]
+                  },
+                  {
+                    featureType: 'transit.station',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#d59563'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'geometry',
+                    stylers: [{color: '#17263c'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'labels.text.fill',
+                    stylers: [{color: '#515c6d'}]
+                  },
+                  {
+                    featureType: 'water',
+                    elementType: 'labels.text.stroke',
+                    stylers: [{color: '#17263c'}]
+                  }
+                  ]
+                })
+
+
+                google.maps.event.addListener(newMap, "click", function (event) {
+
+                  if (isFinishedEdit === false) {
+                    
+                    var latLng = event.latLng
+                    var lat = latLng.lat()
+                    var long = latLng.lng()
+                    console.log(lat + " " + long)
+                    markerLocation = {lat: lat, lng: long}
+
+                    if(confirm("Do you want to add a marker on this specific location?")){
+                      locationCounter += 1
+                      var marker = new google.maps.Marker({
+                        position: markerLocation,
+                        map: newMap,
+                        title: "Location Property"
+                      })
+                      markers.push(marker)
+
+                      marker.set('label', locationCounter.toString())
+
+                      locationLists.push({lat: lat, long: long})
+
+                      var curLocMap = new google.maps.LatLng(lat,long)
+
+                      mapDrawPolylineCoordinates.push(curLocMap)
+
+
+                    }
+
+                  } else {
+
+                    // This part should let user know in order to put more pins on the map should click edit button!!
+
+                  }
+
+                })
               }
 
               
-
-              $('#previewOfAddedPhotoContainer')
-                .append($('<container>')
-                  .append($('<row>')
-                    .append($('<div>')
-                      .addClass('col-lg-4')
-                      .addClass('text-center')
-                      .append($('<img>')
-                        .attr('src',reader.result)
-                        .attr('height', '300px')
-                        .attr('width','300px'))
-                      .append($('<div>')
-                        .append($('<p>')
-                          .text("Description: " + $('#textareaID').val()))
-                        .append($('<p>')
-                          .text("Location Index is " + $('#locationNum').val()))))))
+              
+              $(document).ready(function() {
 
 
-
-              $('#preview').attr('src', 'https://media.giphy.com/media/OQemfICSHDAly/giphy.gif')
-              $('#gettingImgFile').val('')
-              $('#textareaID').val('')
-
-            })
+                //hide preview photo container when the html loaded
+                $('#addedPhotoContainer').hide()
 
 
+                $('#didFinishedEditing').on('click', function(event){
 
-            $('#uploadPhotos').on('click', function(){
+                    // reset the location index option
+                    $('#locationNum').empty()
 
-              firebase.auth().onAuthStateChanged(function(user){
+                    for(var i=0; i < locationLists.length; i++){
+                      $('#locationNum').append($('<option>').text(i+1))
+                    }
 
-
-                    if(user) {
-
-                      var whichBlogNum
-                      
-                      database.ref('/user/'+user.uid).once('value', function(children){
-                        if(children.hasChild('blogs')){
-                          console.log("it does has child named blogs")
-                          database.ref('/user/'+user.uid+'/blogs/').once('value', function(value){
-                            //var keys = Object.keys(value)
-                            //console.log('keys = ' + keys.join(', '))
-                            //console.log("****************************************************************************************************")
-                            //console.log(value)
-                            var numberOfChildren = value.numChildren()
-                            whichBlogNum = numberOfChildren+1
-
-                            database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1) ).set({
-                                Locations: locationLists
-                            })
-                            //console.log("****************************************************************************************************")
-
-                          })
-                          
-                        } else {
-                          console.log("it does NOT NOT has child named blogs")
-                          
-                          database.ref('/user/'+user.uid+"/blogs/" + 1).set({
-                              Locations: locationLists
-                          })
-                        }
-
-                      })
-
-
-
-
-                      for(var i = 0; i < locationLists.length; i++){
-
-                        if(locationLists[i].photo_1 != null || locationLists[i].photo_1 != undefined){
-                          console.log(locationLists[i])
-                          var imageFile = locationLists[i].photo_1.imageData
-                          delete locationLists[i].photo_1.imageData
-
-                          uploadImageAsPromise(imageFile, i, user.uid, 1)
-
-                          if(locationLists[i].photo_2 != null || locationLists[i].photo_2 != undefined){
-                            var secondImgFile = locationLists[i].photo_2.imageData
-                            delete locationLists[i].photo_2.imageData
-                            uploadImageAsPromise(secondImgFile, i, user.uid, 2)
-                          }
-                        }
-
-                      }
-
-                      /*for(var i = 0; i < imgArray.length; i++){
-
-                        var imageFile = imgArray[i].imageData
-
-                        uploadImageAsPromise(imageFile, i, user.uid)
-
-                      }*/
-
-                      function uploadImageAsPromise (imageFile, index, uid, firOrSec) {
-                          return new Promise(function (resolve, reject) {
-
-                            var storageRef = firebase.storage().ref('/' + uid + '/Photo_Stack/' + imageFile.name)
-                            var uploadTask = storageRef.put(imageFile)
-
-
-                            uploadTask.on('state_changed', function(snapshot){
-
-                              var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                              console.log('Upload is ' + progress + '% done')
-
-                              switch (snapshot.state) {
-                                case firebase.storage.TaskState.PAUSED: // or 'paused'
-                                  console.log('Upload is paused')
-                                  break;
-                                case firebase.storage.TaskState.RUNNING: // or 'running'
-                                  console.log('Upload is running')
-                                  break;
-                              }
-                            }, function(error) {
-                                switch (error.code) {
-                                  case 'storage/unauthorized':
-                                    console.log('User doesn\'t have permission to access the object')
-                                    break
-
-                                  case 'storage/canceled':
-                                    console.log('User canceled the upload')
-                                    break
-
-                                  case 'storage/unknown':
-                                    console.log('Unknown error occurred, inspect error.serverResponse')
-                                    break
-                                }
-                            }, function() {
-                                // IMPORTANT NOTE!!!
-                                /* For the first blog, firebase takes time to creating data structure
-                                  Therefore, we do not know where to upload so we are assuming that this is first time we ever upload photo blog
-                                  so we put first index into whichBlogNum = 1 so that it knows where to put
-
-                                */
-                                //--------------------------------------------------------------//
-                                if(whichBlogNum === undefined){
-                                    whichBlogNum = 1
-                                }
-                                //--------------------------------------------------------------//
-
-
-                                var downloadURL = uploadTask.snapshot.downloadURL
-                                if(firOrSec === 1) {
-                                  locationLists[index].photo_1.imgFileURL = downloadURL
-
-                                  database.ref('/user/'+ user.uid).child('blogs').child(''+whichBlogNum).child('Locations').child(''+index).child('photo_1').set({
-                                    locationIndex: index,
-                                    description:locationLists[index].photo_1.description,
-                                    imgFileURL: downloadURL
-
-                                  })
-                                } else {
-                                  locationLists[index].photo_2.imgFileURL = downloadURL
-                                  database.ref('/user/'+ user.uid).child('blogs').child(''+whichBlogNum).child('Locations').child(''+index).child('photo_2').set({
-                                    locationIndex: index,
-                                    description:locationLists[index].photo_2.description,
-                                    imgFileURL: downloadURL
-                                  })
-                                }
-                            })
-                            
-                          })
-                      }
+                    if(isFinishedEdit === true){
+                      isFinishedEdit = false
+                      $('#didFinishedEditing').text('Finished')
+                      console.log("adding")
 
 
                     } else {
-                      console.log("can not grab the user")
+
+                      path = new google.maps.Polyline({
+                        path: mapDrawPolylineCoordinates,
+                        geodesic: true,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 2
+                      })
+
+                      path.setMap(newMap)
+
+                      isFinishedEdit = true
+                      $('#didFinishedEditing').text('Edit')
+
+                      
                     }
+                })
+
+
+                $('#addPhotoAndDescription').on('click', function(event){
+                  event.preventDefault()
+
+
+                  $('#addedPhotoContainer').show()
+
+                  var photoObject = {
+                    imageData: imgFile,
+                    locationIndex: ($('#locationNum').val()-1),
+                    description: $('#textareaID').val()
+                  }
+
+
+                  imgArray.push(photoObject)
+
+                  for(var i = 0; i < locationLists.length; i++){
+                    if(photoObject.locationIndex === i){
+                      // need to fixed to be able to add multiple photos @ same location
+                      if(locationLists[i].photo_1 == null || locationLists[i].photo_1 == undefined){
+                        locationLists[i].photo_1 = photoObject
+                        console.log(locationLists)
+                      } else {
+                        locationLists[i].photo_2 = photoObject
+                        console.log(locationLists)
+                      }
+                      
+                    }
+                  }
+
+                  
+
+                  $('#previewOfAddedPhotoContainer')
+                    .append($('<container>')
+                      .append($('<row>')
+                        .append($('<div>')
+                          .addClass('col-lg-4')
+                          .addClass('text-center')
+                          .append($('<img>')
+                            .attr('src',reader.result)
+                            .attr('height', '300px')
+                            .attr('width','300px'))
+                          .append($('<div>')
+                            .append($('<p>')
+                              .text("Description: " + $('#textareaID').val()))
+                            .append($('<p>')
+                              .text("Location Index is " + $('#locationNum').val()))))))
+
+
+
+                  $('#preview').attr('src', 'https://media.giphy.com/media/OQemfICSHDAly/giphy.gif')
+                  $('#gettingImgFile').val('')
+                  $('#textareaID').val('')
+
+                })
+
+
+
+                $('#uploadPhotos').on('click', function(){
+
+                  $('#previewOfAddedPhotoContainer').empty()
+                  $('#previewOfAddedPhotoContainer').addClass('text-center')
+                  $('#previewOfAddedPhotoContainer').append($('<div>')
+                    .addClass('loader').css({
+                    'margin': '0 auto'
+                  }))
+                  
+
+                  firebase.auth().onAuthStateChanged(function(user){
+
+
+                        if(user) {
+
+                          
+                          
+                          database.ref('/user/'+user.uid).once('value', function(children){
+                            if(children.hasChild('blogs')){
+                              console.log("it does has child named blogs")
+                              database.ref('/user/'+user.uid+'/blogs/').once('value', function(value){
+
+                                var numberOfChildren = value.numChildren()
+                                whichBlogNum = numberOfChildren+1
+
+                                database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1) ).set({
+                                    Locations: locationLists,
+                                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                                })
+                              })
+                              
+                            } else {
+                              console.log("it does NOT NOT has child named blogs")
+                              
+                              database.ref('/user/'+user.uid+"/blogs/" + 1).set({
+                                  Locations: locationLists,
+                                  timestamp: firebase.database.ServerValue.TIMESTAMP
+                              })
+                            }
+
+                          })
+
+
+                          var howManyUploading = 0
+
+                          for(var i = 0; i < locationLists.length; i++){
+
+                            if(locationLists[i].photo_1 != null || locationLists[i].photo_1 != undefined){
+                              console.log(locationLists[i])
+                              var imageFile = locationLists[i].photo_1.imageData
+                              delete locationLists[i].photo_1.imageData
+
+                              howManyUploading += 1
+                              console.log(howManyUploading)
+                              console.log("---------------------------")
+                              uploadImageAsPromise(imageFile, i, user.uid, 1)
+
+                              if(locationLists[i].photo_2 != null || locationLists[i].photo_2 != undefined){
+                                var secondImgFile = locationLists[i].photo_2.imageData
+                                delete locationLists[i].photo_2.imageData
+                                howManyUploading += 1
+                                console.log(howManyUploading)
+                                console.log("---------------------------")
+                                uploadImageAsPromise(secondImgFile, i, user.uid, 2)
+                              }
+                            }
+
+                          }
+
+
+                          function uploadImageAsPromise (imageFile, index, uid, firOrSec) {
+                              return new Promise(function (resolve, reject) {
+
+                                var storageRef = firebase.storage().ref('/' + uid + '/Photo_Stack/' + imageFile.name)
+                                var uploadTask = storageRef.put(imageFile)
+
+
+                                uploadTask.on('state_changed', function(snapshot){
+
+                                  var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                                  console.log('Upload is ' + progress + '% done')
+                                  if(progress === 100){
+                                    howManyUploading -= 1
+                                    if(howManyUploading <= 0){
+                                      $('#previewOfAddedPhotoContainer').empty()
+                                      $('#previewOfAddedPhotoContainer').append($('<h2>').text('Uploading is done!'))
+                                      $('#uploadPhotos').val('1')
+                                      $('#uploadPhotos').text('Home')
+                                      path.setMap(null)
+                                      for(var i = 0; i < markers.length; i++){
+                                        markers[i].setMap(null)
+                                      }
+                                      //Make locationLists empty array again!!
+                                      locationLists.length = 0
+                                      isFinishedEdit = false
+                                      $('#didFinishedEditing').text('Finished')
+
+                                      setTimeout(function(){
+                                        $('#addedPhotoContainer').hide()
+                                      }, 5000)
+
+                                    }
+                                  }
+
+                                  switch (snapshot.state) {
+                                    case firebase.storage.TaskState.PAUSED:
+                                      console.log('Upload is paused')
+                                      break;
+                                    case firebase.storage.TaskState.RUNNING:
+                                      console.log('Upload is running')
+                                      break;
+                                  }
+                                }, function(error) {
+                                    switch (error.code) {
+                                      case 'storage/unauthorized':
+                                        console.log('User doesn\'t have permission to access the object')
+                                        break
+
+                                      case 'storage/canceled':
+                                        console.log('User canceled the upload')
+                                        break
+
+                                      case 'storage/unknown':
+                                        console.log('Unknown error occurred, inspect error.serverResponse')
+                                        break
+                                    }
+                                }, function() {
+
+
+                                    // IMPORTANT NOTE!!!
+                                    /* For the first blog, firebase takes time to creating data structure
+                                      Therefore, we do not know where to upload so we are assuming that this is first time we ever upload photo blog
+                                      so we put first index into whichBlogNum = 1 so that it knows where to put
+
+                                    */
+                                    //--------------------------------------------------------------//
+                                    if(whichBlogNum === undefined){
+                                        whichBlogNum = 1
+                                    }
+                                    //--------------------------------------------------------------//
+
+
+                                    var downloadURL = uploadTask.snapshot.downloadURL
+                                    if(firOrSec === 1) {
+                                      locationLists[index].photo_1.imgFileURL = downloadURL
+
+                                      database.ref('/user/'+ user.uid).child('blogs').child(whichBlogNum.toString()).child('Locations').child(index.toString()).child('photo_1').set({
+                                        locationIndex: index,
+                                        description:locationLists[index].photo_1.description,
+                                        imgFileURL: downloadURL
+
+                                      })
+                                    } else {
+                                      locationLists[index].photo_2.imgFileURL = downloadURL
+                                      database.ref('/user/'+ user.uid).child('blogs').child(whichBlogNum.toString()).child('Locations').child(index.toString()).child('photo_2').set({
+                                        locationIndex: index,
+                                        description:locationLists[index].photo_2.description,
+                                        imgFileURL: downloadURL
+                                      })
+                                    }
+                        
+
+                                })
+                                
+                              })
+                          }
+
+
+                        } else {
+                          console.log("can not grab the user")
+                        }
+                  })
+
+
+                  
+                  
+                  
+
+                })
+
+
+
+
+                
+
+                $('#gettingImgFile').on('change', previewFile)
+
+                function previewFile() {
+                  var preview = document.querySelector('img')
+                  imgFile = document.querySelector('input[type=file]').files[0]
+                  console.log(imgFile.name)
+                  reader= new FileReader()
+
+
+                  reader.addEventListener('load', function() {
+                    $('#preview').attr('src', reader.result)
+                  }, false)
+
+                  if(imgFile){
+                    //imgURL = reader.readAsDataURL(imgFile)
+                    reader.readAsDataURL(imgFile)
+                    
+                  } 
+                }
+
+
+
+
+                var textarea = document.querySelector('textarea');
+
+                textarea.addEventListener('keydown', autosize);
+                             
+                function autosize(){
+                  var el = this;
+                  setTimeout(function(){
+                    el.style.cssText = 'height:auto; padding:0';
+                    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+                  },0);
+                }
+
+
               })
 
-
-
-
               
-
-            })
-
-
-
-
-            var imgFile
-            var imgURL
-            var reader
-            var imgArray = []
-
-            $('#gettingImgFile').on('change', previewFile)
-
-            function previewFile() {
-              var preview = document.querySelector('img')
-              imgFile = document.querySelector('input[type=file]').files[0]
-              console.log(imgFile.name)
-              reader= new FileReader()
-
-
-              reader.addEventListener('load', function() {
-                $('#preview').attr('src', reader.result)
-              }, false)
-
-              if(imgFile){
-                //imgURL = reader.readAsDataURL(imgFile)
-                reader.readAsDataURL(imgFile)
-                
-              } 
-            }
-
-
-
-
-            var textarea = document.querySelector('textarea');
-
-            textarea.addEventListener('keydown', autosize);
-                         
-            function autosize(){
-              var el = this;
-              setTimeout(function(){
-                el.style.cssText = 'height:auto; padding:0';
-                el.style.cssText = 'height:' + el.scrollHeight + 'px';
-              },0);
-            }
-
-
-          })
-
-          
-        </script>
-      </div>     
-      <div class="backgroundColorPaint">
-        <button class="btn btn-danger" id="didFinishedEditing"> Finished </button>
-      </div> 
-    </div>
-
-
-
-    
-
-    <div class="panel panel-default" id="previewPhotoContainer">
-      <div class="panel-heading">
-        <h3 class="panel-title text-center">Add Description</h3>
-      </div>
-      <div class="panel-body">
-
-        <div class="form-group">
-          <label for="locationNum">
-            Location Index
-          </label>
-          <select class="form-control" id="locationNum">
-            
-          </select>
+            </script>
+          </div>     
+          <div class="backgroundColorPaint">
+            <button class="btn btn-danger" id="didFinishedEditing"> Finished </button>
+          </div> 
         </div>
 
-        <div class="text-center">
-          <div class="form-group">
-            <label class="upload-group">
-              Photo Upload
-            </label>
 
-            <br>
-            <img src="https://media.giphy.com/media/OQemfICSHDAly/giphy.gif" height="300" width="300" id="preview">
-            <input type="file" name="photos" id="gettingImgFile" >
+
+        
+
+        <div class="panel panel-default" id="previewPhotoContainer">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center">Add Description</h3>
+          </div>
+          <div class="panel-body">
+
+            <div class="form-group">
+              <label for="locationNum">
+                Location Index
+              </label>
+              <select class="form-control" id="locationNum">
+                
+              </select>
+            </div>
+
+            <div class="text-center">
+              <div class="form-group">
+                <label class="upload-group">
+                  Photo Upload
+                </label>
+
+                <br>
+                <img src="https://media.giphy.com/media/OQemfICSHDAly/giphy.gif" height="300" width="300" id="preview">
+                <input type="file" name="photos" id="gettingImgFile" >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>
+                Description
+              </label>
+
+              <br>
+              <textarea name="Photo Description" id="textareaID"></textarea>
+              
+            </div>
+
+
+            <div class="text-center">
+              <button class="btn btn-danger" id="addPhotoAndDescription">Add</button>
+            </div>
+            
           </div>
         </div>
 
-        <div class="form-group">
-          <label>
-            Description
-          </label>
 
-          <br>
-          <textarea name="Photo Description" id="textareaID"></textarea>
-          
+
+        <div class="panel panel-default" id="addedPhotoContainer">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center">Added Photos & Description</h3>
+          </div>
+          <div class="panel-body" id="previewOfAddedPhotoContainer">
+
+          </div>
+          <div class="text-center" id="finalButton">
+            <button class="btn btn-danger" id="uploadPhotos" value="0">Upload Your Journey</button>
+          </div>
         </div>
 
-
-        <div class="text-center">
-          <button class="btn btn-danger" id="addPhotoAndDescription">Add</button>
-
-        </div>
-        
       </div>
-    </div>
 
+    </body>
 
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBDIgfM9PCnLI_koxi20OA2EqB_8yKiu4&callback=initMap">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 
-    <div class="panel panel-default" id="addedPhotoContainer">
-      <div class="panel-heading">
-        <h3 class="panel-title text-center">Added Photos & Description</h3>
-      </div>
-      <div class="panel-body" id="previewOfAddedPhotoContainer">
-
-      </div>
-      <div class="text-center" id="finalButton">
-        <button class="btn btn-danger" id="uploadPhotos">Upload Your Journey</button>
-      </div>
-    </div>
-
-  </div>
-
-</body>
-
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBDIgfM9PCnLI_koxi20OA2EqB_8yKiu4&callback=initMap">
-</script>
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-
-<script src="assets/javascript/firebase.js"></script>
-<script type="assets/javascript/journey.js"></script>
+    <script src="assets/javascript/firebase.js"></script>
+    <script type="assets/javascript/journey.js"></script>
 </html>
