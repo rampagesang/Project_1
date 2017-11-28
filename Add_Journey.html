@@ -458,12 +458,14 @@
                                         for(var i = 0; i < markers.length; i++){
                                           markers[i].setMap(null)
                                         }
-                                        //Make locationLists empty array again!!
-                                        locationLists.length = 0
+                                        
+                                        
                                         isFinishedEdit = false
                                         $('#didFinishedEditing').text('Finished')
 
                                         setTimeout(function(){
+                                          //Make locationLists empty array again!!
+                                          locationLists.length = 0
                                           $('#addedPhotoContainer').hide()
                                         }, 10000)
 
