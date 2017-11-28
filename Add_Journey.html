@@ -366,180 +366,181 @@
 
                 $('#uploadPhotos').on('click', function(){
 
-                  $('#previewOfAddedPhotoContainer').empty()
-                  $('#previewOfAddedPhotoContainer').addClass('text-center')
-                  $('#previewOfAddedPhotoContainer').append($('<div>')
-                    .addClass('loader').css({
-                    'margin': '0 auto'
-                  }))
-                  
+                  if($('#uploadPhotos').val() === '1') {
+                    document.location.href = "home.html"
+                  } else {
+                    $('#previewOfAddedPhotoContainer').empty()
+                    $('#previewOfAddedPhotoContainer').addClass('text-center')
+                    $('#previewOfAddedPhotoContainer').append($('<div>')
+                      .addClass('loader').css({
+                      'margin': '0 auto'
+                    }))
+                    
 
-                  firebase.auth().onAuthStateChanged(function(user){
+                    firebase.auth().onAuthStateChanged(function(user){
 
 
-                        if(user) {
+                          if(user) {
 
-                          
-                          
-                          database.ref('/user/'+user.uid).once('value', function(children){
-                            if(children.hasChild('blogs')){
-                              console.log("it does has child named blogs")
-                              database.ref('/user/'+user.uid+'/blogs/').once('value', function(value){
+                            
+                            database.ref('/user/'+user.uid).once('value', function(children){
+                              if(children.hasChild('blogs')){
+                                console.log("it does has child named blogs")
+                                database.ref('/user/'+user.uid+'/blogs/').once('value', function(value){
 
-                                var numberOfChildren = value.numChildren()
-                                whichBlogNum = numberOfChildren+1
+                                  var numberOfChildren = value.numChildren()
+                                  whichBlogNum = numberOfChildren+1
 
-                                database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1) ).set({
+                                  database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1) ).set({
+                                      Locations: locationLists,
+                                      timestamp: firebase.database.ServerValue.TIMESTAMP
+                                  })
+                                })
+                                
+                              } else {
+                                console.log("it does NOT NOT has child named blogs")
+                                
+                                database.ref('/user/'+user.uid+"/blogs/" + 1).set({
                                     Locations: locationLists,
                                     timestamp: firebase.database.ServerValue.TIMESTAMP
                                 })
-                              })
-                              
-                            } else {
-                              console.log("it does NOT NOT has child named blogs")
-                              
-                              database.ref('/user/'+user.uid+"/blogs/" + 1).set({
-                                  Locations: locationLists,
-                                  timestamp: firebase.database.ServerValue.TIMESTAMP
-                              })
-                            }
+                              }
 
-                          })
+                            })
 
 
-                          var howManyUploading = 0
+                            var howManyUploading = 0
 
-                          for(var i = 0; i < locationLists.length; i++){
+                            for(var i = 0; i < locationLists.length; i++){
 
-                            if(locationLists[i].photo_1 != null || locationLists[i].photo_1 != undefined){
-                              console.log(locationLists[i])
-                              var imageFile = locationLists[i].photo_1.imageData
-                              delete locationLists[i].photo_1.imageData
+                              if(locationLists[i].photo_1 != null || locationLists[i].photo_1 != undefined){
+                                console.log(locationLists[i])
+                                var imageFile = locationLists[i].photo_1.imageData
+                                delete locationLists[i].photo_1.imageData
 
-                              howManyUploading += 1
-                              console.log(howManyUploading)
-                              console.log("---------------------------")
-                              uploadImageAsPromise(imageFile, i, user.uid, 1)
-
-                              if(locationLists[i].photo_2 != null || locationLists[i].photo_2 != undefined){
-                                var secondImgFile = locationLists[i].photo_2.imageData
-                                delete locationLists[i].photo_2.imageData
                                 howManyUploading += 1
                                 console.log(howManyUploading)
                                 console.log("---------------------------")
-                                uploadImageAsPromise(secondImgFile, i, user.uid, 2)
+                                uploadImageAsPromise(imageFile, i, user.uid, 1)
+
+                                if(locationLists[i].photo_2 != null || locationLists[i].photo_2 != undefined){
+                                  var secondImgFile = locationLists[i].photo_2.imageData
+                                  delete locationLists[i].photo_2.imageData
+                                  howManyUploading += 1
+                                  console.log(howManyUploading)
+                                  console.log("---------------------------")
+                                  uploadImageAsPromise(secondImgFile, i, user.uid, 2)
+                                }
                               }
+
                             }
 
-                          }
+
+                            function uploadImageAsPromise (imageFile, index, uid, firOrSec) {
+                                return new Promise(function (resolve, reject) {
+
+                                  var storageRef = firebase.storage().ref('/' + uid + '/Photo_Stack/' + imageFile.name)
+                                  var uploadTask = storageRef.put(imageFile)
 
 
-                          function uploadImageAsPromise (imageFile, index, uid, firOrSec) {
-                              return new Promise(function (resolve, reject) {
+                                  uploadTask.on('state_changed', function(snapshot){
 
-                                var storageRef = firebase.storage().ref('/' + uid + '/Photo_Stack/' + imageFile.name)
-                                var uploadTask = storageRef.put(imageFile)
+                                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                                    console.log('Upload is ' + progress + '% done')
+                                    if(progress === 100){
+                                      howManyUploading -= 1
+                                      if(howManyUploading <= 0){
+                                        $('#previewOfAddedPhotoContainer').empty()
+                                        $('#previewOfAddedPhotoContainer').append($('<h2>').text('Uploading is done!'))
+                                        $('#uploadPhotos').val('1')
+                                        $('#uploadPhotos').text('Home')
+                                        path.setMap(null)
+                                        for(var i = 0; i < markers.length; i++){
+                                          markers[i].setMap(null)
+                                        }
+                                        //Make locationLists empty array again!!
+                                        locationLists.length = 0
+                                        isFinishedEdit = false
+                                        $('#didFinishedEditing').text('Finished')
 
+                                        setTimeout(function(){
+                                          $('#addedPhotoContainer').hide()
+                                        }, 5000)
 
-                                uploadTask.on('state_changed', function(snapshot){
-
-                                  var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                                  console.log('Upload is ' + progress + '% done')
-                                  if(progress === 100){
-                                    howManyUploading -= 1
-                                    if(howManyUploading <= 0){
-                                      $('#previewOfAddedPhotoContainer').empty()
-                                      $('#previewOfAddedPhotoContainer').append($('<h2>').text('Uploading is done!'))
-                                      $('#uploadPhotos').val('1')
-                                      $('#uploadPhotos').text('Home')
-                                      path.setMap(null)
-                                      for(var i = 0; i < markers.length; i++){
-                                        markers[i].setMap(null)
                                       }
-                                      //Make locationLists empty array again!!
-                                      locationLists.length = 0
-                                      isFinishedEdit = false
-                                      $('#didFinishedEditing').text('Finished')
-
-                                      setTimeout(function(){
-                                        $('#addedPhotoContainer').hide()
-                                      }, 5000)
-
                                     }
-                                  }
 
-                                  switch (snapshot.state) {
-                                    case firebase.storage.TaskState.PAUSED:
-                                      console.log('Upload is paused')
-                                      break;
-                                    case firebase.storage.TaskState.RUNNING:
-                                      console.log('Upload is running')
-                                      break;
-                                  }
-                                }, function(error) {
-                                    switch (error.code) {
-                                      case 'storage/unauthorized':
-                                        console.log('User doesn\'t have permission to access the object')
-                                        break
-
-                                      case 'storage/canceled':
-                                        console.log('User canceled the upload')
-                                        break
-
-                                      case 'storage/unknown':
-                                        console.log('Unknown error occurred, inspect error.serverResponse')
-                                        break
+                                    switch (snapshot.state) {
+                                      case firebase.storage.TaskState.PAUSED:
+                                        console.log('Upload is paused')
+                                        break;
+                                      case firebase.storage.TaskState.RUNNING:
+                                        console.log('Upload is running')
+                                        break;
                                     }
-                                }, function() {
+                                  }, function(error) {
+                                      switch (error.code) {
+                                        case 'storage/unauthorized':
+                                          console.log('User doesn\'t have permission to access the object')
+                                          break
+
+                                        case 'storage/canceled':
+                                          console.log('User canceled the upload')
+                                          break
+
+                                        case 'storage/unknown':
+                                          console.log('Unknown error occurred, inspect error.serverResponse')
+                                          break
+                                      }
+                                  }, function() {
 
 
-                                    // IMPORTANT NOTE!!!
-                                    /* For the first blog, firebase takes time to creating data structure
-                                      Therefore, we do not know where to upload so we are assuming that this is first time we ever upload photo blog
-                                      so we put first index into whichBlogNum = 1 so that it knows where to put
+                                      // IMPORTANT NOTE!!!
+                                      /* For the first blog, firebase takes time to creating data structure
+                                        Therefore, we do not know where to upload so we are assuming that this is first time we ever upload photo blog
+                                        so we put first index into whichBlogNum = 1 so that it knows where to put
 
-                                    */
-                                    //--------------------------------------------------------------//
-                                    if(whichBlogNum === undefined){
-                                        whichBlogNum = 1
-                                    }
-                                    //--------------------------------------------------------------//
+                                      */
+                                      //--------------------------------------------------------------//
+                                      if(whichBlogNum === undefined){
+                                          whichBlogNum = 1
+                                      }
+                                      //--------------------------------------------------------------//
 
 
-                                    var downloadURL = uploadTask.snapshot.downloadURL
-                                    if(firOrSec === 1) {
-                                      locationLists[index].photo_1.imgFileURL = downloadURL
+                                      var downloadURL = uploadTask.snapshot.downloadURL
+                                      if(firOrSec === 1) {
+                                        locationLists[index].photo_1.imgFileURL = downloadURL
 
-                                      database.ref('/user/'+ user.uid).child('blogs').child(whichBlogNum.toString()).child('Locations').child(index.toString()).child('photo_1').set({
-                                        locationIndex: index,
-                                        description:locationLists[index].photo_1.description,
-                                        imgFileURL: downloadURL
+                                        database.ref('/user/'+ user.uid).child('blogs').child(whichBlogNum.toString()).child('Locations').child(index.toString()).child('photo_1').set({
+                                          locationIndex: index,
+                                          description:locationLists[index].photo_1.description,
+                                          imgFileURL: downloadURL
 
-                                      })
-                                    } else {
-                                      locationLists[index].photo_2.imgFileURL = downloadURL
-                                      database.ref('/user/'+ user.uid).child('blogs').child(whichBlogNum.toString()).child('Locations').child(index.toString()).child('photo_2').set({
-                                        locationIndex: index,
-                                        description:locationLists[index].photo_2.description,
-                                        imgFileURL: downloadURL
-                                      })
-                                    }
-                        
+                                        })
+                                      } else {
+                                        locationLists[index].photo_2.imgFileURL = downloadURL
+                                        database.ref('/user/'+ user.uid).child('blogs').child(whichBlogNum.toString()).child('Locations').child(index.toString()).child('photo_2').set({
+                                          locationIndex: index,
+                                          description:locationLists[index].photo_2.description,
+                                          imgFileURL: downloadURL
+                                        })
+                                      }
+                          
 
+                                  })
+                                  
                                 })
-                                
-                              })
+                            }
+
+
+                          } else {
+                            console.log("can not grab the user")
                           }
+                    })
 
+                  }
 
-                        } else {
-                          console.log("can not grab the user")
-                        }
-                  })
-
-
-                  
-                  
                   
 
                 })
