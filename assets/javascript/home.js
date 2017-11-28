@@ -1,5 +1,99 @@
 
 
+var map
+
+
+function initMap() {
+    // Styles a map in night mode.
+    map = new google.maps.Map(document.getElementById('map'), {
+    	center: {lat: 40.674, lng: -73.945},
+    	zoom: 12,
+    	styles: [
+    	{elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+    	{elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+    	{elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+    	{
+    		featureType: 'administrative.locality',
+    		elementType: 'labels.text.fill',
+    		stylers: [{color: '#d59563'}]
+    	},
+    	{
+    		featureType: 'poi',
+    		elementType: 'labels.text.fill',
+    		stylers: [{color: '#d59563'}]
+    	},
+    	{
+    		featureType: 'poi.park',
+    		elementType: 'geometry',
+    		stylers: [{color: '#263c3f'}]
+    	},
+    	{
+    		featureType: 'poi.park',
+    		elementType: 'labels.text.fill',
+    		stylers: [{color: '#6b9a76'}]
+    	},
+    	{
+    		featureType: 'road',
+    		elementType: 'geometry',
+    		stylers: [{color: '#38414e'}]
+    	},
+    	{
+    		featureType: 'road',
+    		elementType: 'geometry.stroke',
+    		stylers: [{color: '#212a37'}]
+    	},
+    	{
+    		featureType: 'road',
+    		elementType: 'labels.text.fill',
+    		stylers: [{color: '#9ca5b3'}]
+    	},
+    	{
+    		featureType: 'road.highway',
+    		elementType: 'geometry',
+    		stylers: [{color: '#746855'}]
+    	},
+    	{
+    		featureType: 'road.highway',
+    		elementType: 'geometry.stroke',
+    		stylers: [{color: '#1f2835'}]
+    	},
+    	{
+    		featureType: 'road.highway',
+    		elementType: 'labels.text.fill',
+    		stylers: [{color: '#f3d19c'}]
+    	},
+    	{
+    		featureType: 'transit',
+    		elementType: 'geometry',
+    		stylers: [{color: '#2f3948'}]
+    	},
+    	{
+    		featureType: 'transit.station',
+    		elementType: 'labels.text.fill',
+    		stylers: [{color: '#d59563'}]
+    	},
+    	{
+    		featureType: 'water',
+    		elementType: 'geometry',
+    		stylers: [{color: '#17263c'}]
+    	},
+    	{
+    		featureType: 'water',
+    		elementType: 'labels.text.fill',
+    		stylers: [{color: '#515c6d'}]
+    	},
+    	{
+    		featureType: 'water',
+    		elementType: 'labels.text.stroke',
+    		stylers: [{color: '#17263c'}]
+    	}
+    	]
+    })
+
+}
+
+
+
 $('#addJourney').on('click', function(event){
 	event.preventDefault()
 
@@ -31,6 +125,7 @@ function retrieveDatabase(uid) {
 	var numOfBlogs = 0
 	var representativePreviewPicture
 	var isThisFirstPicture = false
+	var mapDrawPolylineCoordinates = []
 
 	database.ref('/user/' + uid + '/blogs/').once('value',function(snapshot){
 
@@ -43,6 +138,24 @@ function retrieveDatabase(uid) {
 				var locationObjectArray = value.val()
 
 				for(var i = 0; i < locationObjectArray.length; i++){
+
+					var lat = locationObjectArray[i].lat
+					var long = locationObjectArray[i].long
+					var markerLocation = {lat: lat, lng: long}
+
+					var marker = new google.maps.Marker({
+						position: markerLocation,
+						map: map,
+						title: "Location Property"
+					})
+					//markers.push(marker)
+
+					marker.set('label', (i+1).toString())
+					var curLocMap = new google.maps.LatLng(lat,long)
+					mapDrawPolylineCoordinates.push(curLocMap)
+
+
+
 					if(locationObjectArray[i].photo_1 != null || locationObjectArray[i].photo_1 != undefined){
 						
 						var description_photo1 = locationObjectArray[i].photo_1.description
@@ -51,6 +164,7 @@ function retrieveDatabase(uid) {
 						if(isThisFirstPicture != true){
 							isThisFirstPicture = true
 							representativePreviewPicture = imgFileURL_photo1
+							$('#latestBlogPreviewPicture').attr('src', representativePreviewPicture)
 						}
 						
 						console.log('photo1_des' + description_photo1)
@@ -64,9 +178,20 @@ function retrieveDatabase(uid) {
 						}
 					} else {
 
-
 					}
 				}
+				path = new google.maps.Polyline({
+                        path: mapDrawPolylineCoordinates,
+                        geodesic: true,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 1.0,
+                        strokeWeight: 2
+                      })
+
+                path.setMap(map)
+
+				mapDrawPolylineCoordinates.length = 0
+				//isThisFirstPicture = false
 			})
 
 		}
