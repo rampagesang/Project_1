@@ -123,6 +123,7 @@ function retrieveDatabase(uid) {
 	console.log(uid)
 
 	var numOfBlogs = 0
+	var whichBlog = 0
 	var representativePreviewPicture
 	var isThisFirstPicture = false
 	var mapDrawPolylineCoordinates = []
@@ -133,9 +134,26 @@ function retrieveDatabase(uid) {
 		
 
 		for(var i = numOfBlogs; i > 0; i--) {
-			database.ref('/user/'+uid).child('blogs').child(i.toString()).child('Locations').once('value', function(value){
+
+
+			
+
+			whichBlog = i
+
+			database.ref('/user/'+uid).child('blogs').child(i.toString()).once('value', function(value){
 				console.log(value.val())
-				var locationObjectArray = value.val()
+				var blogObjectArray = value.val()
+				var title = blogObjectArray.title
+				var summary = blogObjectArray.journeyStory
+				var date = blogObjectArray.timestamp
+
+				/*$('#representTitle_'+i).text(title)
+				$('#representStory_'+i).text(summary)*/
+
+				
+
+
+				var locationObjectArray = value.val().Locations
 
 				for(var i = 0; i < locationObjectArray.length; i++){
 
@@ -164,7 +182,51 @@ function retrieveDatabase(uid) {
 						if(isThisFirstPicture != true){
 							isThisFirstPicture = true
 							representativePreviewPicture = imgFileURL_photo1
-							$('#latestBlogPreviewPicture').attr('src', representativePreviewPicture)
+
+							$('#blogs').append($('<hr>'), $('<br>'), $('<div>')
+								.addClass('container')
+								.append($('<div>')
+									.addClass('row')
+									.append($('<div>')
+										.addClass('col-sm-1'))
+									.append($('<div>')
+										.addClass('col-md-9')
+										.append($('<div>')
+											.addClass('blog-post-display')
+											.append($('<div>')
+												.addClass('posts-wrap')
+												.append($('<article>')
+													.attr('id', i+' blog')
+													.addClass('list-post list-post-b')
+													.append($('<div>')
+														.addClass('post-thumb')
+														.append($('<img>')
+															.attr('id', 'representPic_'+i)
+															.attr('src', representativePreviewPicture)
+															.attr('width', '300')
+															.attr('height', '300')))
+													.append($('<div>')
+														.addClass('content')
+														.append($('<div>')
+															.addClass('post-meta')
+															.addClass('padding_top')
+															.append($('<time>')
+																.text(date)))
+														.append($('<h2>')
+															.addClass('post-title')
+															.attr('id', 'representTitle_'+i)
+															.text(title))
+														.append($('<div>')
+															.addClass('post-content post-excerpt cf')
+															.append($('<p>')
+																.attr('id', 'representStory_'+i)
+																.text(summary)))
+														.append($('<div>')
+															.addClass('post-footer')
+															.append($('<a>')
+																.attr('href','#')
+																.text('Detail'))))))))))
+							//$('#representPic_'+whichBlog).attr('src', representativePreviewPicture)
 						}
 						
 						console.log('photo1_des' + description_photo1)
@@ -181,17 +243,17 @@ function retrieveDatabase(uid) {
 					}
 				}
 				path = new google.maps.Polyline({
-                        path: mapDrawPolylineCoordinates,
-                        geodesic: true,
-                        strokeColor: '#FF0000',
-                        strokeOpacity: 1.0,
-                        strokeWeight: 2
-                      })
+					path: mapDrawPolylineCoordinates,
+					geodesic: true,
+					strokeColor: '#FF0000',
+					strokeOpacity: 1.0,
+					strokeWeight: 2
+				})
 
-                path.setMap(map)
+				path.setMap(map)
 
 				mapDrawPolylineCoordinates.length = 0
-				//isThisFirstPicture = false
+				isThisFirstPicture = false
 			})
 
 		}

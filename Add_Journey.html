@@ -109,6 +109,10 @@
               var imgURL
               var reader
               var imgArray = []
+
+              var nameOfJourney
+              var journeyStory
+
               
 
               function initMap() {
@@ -382,6 +386,21 @@
 
                           if(user) {
 
+                            var date = moment().format('MMM DD, YYYY')
+
+                            if($('#nameOfJourney').val() != undefined || $('#nameOfJourney').val() != null){
+                              nameOfJourney = $('#nameOfJourney').val()
+
+                            } else {
+                              nameOfJourney = "Memorial Journey"
+                            }
+                            if($('#textarea1').val() != undefined || $('#textarea1').val() != null || $('#textarea1').val() != undefined){
+                              journeyStory = $('#textarea1').val()
+                            } else {
+                              journeyStory = "The Best Moment of My Life"
+
+                            }
+
                             
                             database.ref('/user/'+user.uid).once('value', function(children){
                               if(children.hasChild('blogs')){
@@ -391,9 +410,12 @@
                                   var numberOfChildren = value.numChildren()
                                   whichBlogNum = numberOfChildren+1
 
+
                                   database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1) ).set({
                                       Locations: locationLists,
-                                      timestamp: firebase.database.ServerValue.TIMESTAMP
+                                      title: nameOfJourney,
+                                      journeyStory: journeyStory, 
+                                      timestamp: date
                                   })
                                 })
                                 
@@ -402,7 +424,9 @@
                                 
                                 database.ref('/user/'+user.uid+"/blogs/" + 1).set({
                                     Locations: locationLists,
-                                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                                    title: nameOfJourney,
+                                    journeyStory: journeyStory, 
+                                    timestamp: date
                                 })
                               }
 
@@ -454,6 +478,9 @@
                                         $('#previewOfAddedPhotoContainer').append($('<h2>').text('Uploading is done!'))
                                         $('#uploadPhotos').val('1')
                                         $('#uploadPhotos').text('Home')
+                                        $('#nameOfJourney').val('')
+                                        $('#textarea1').val('')
+                                        $('#locationNum').empty()
                                         path.setMap(null)
                                         for(var i = 0; i < markers.length; i++){
                                           markers[i].setMap(null)
@@ -581,12 +608,13 @@
                 var textarea = document.querySelector('textarea');
 
                 textarea.addEventListener('keydown', autosize);
+
                              
                 function autosize(){
-                  var el = this;
+                  var el = this
                   setTimeout(function(){
-                    el.style.cssText = 'height:auto; padding:0';
-                    el.style.cssText = 'height:' + el.scrollHeight + 'px';
+                    el.style.cssText = 'height:auto; padding:0'
+                    el.style.cssText = 'height:' + el.scrollHeight + 'px'
                   },0);
                 }
 
@@ -601,13 +629,45 @@
           </div> 
         </div>
 
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center">
+              Name of Your Journey
+            </h3>
+            
+          </div>
+          <div class="panel-body">
 
+            <div class="form-group">
+              <input type="text" class="form-control" id="nameOfJourney">
+            </div>
+
+            
+          </div>
+
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title text-center">
+              About Your Journey
+            </h3>
+            
+          </div>
+          <div class="panel-body">
+
+            <textarea name="Route Description" id="textarea1"></textarea>
+
+            
+          </div>
+
+        </div>
 
         
 
         <div class="panel panel-default" id="previewPhotoContainer">
           <div class="panel-heading">
-            <h3 class="panel-title text-center">Add Description</h3>
+            <h3 class="panel-title text-center">Add Photo</h3>
           </div>
           <div class="panel-body">
 
@@ -638,7 +698,7 @@
               </label>
 
               <br>
-              <textarea name="Photo Description" id="textareaID"></textarea>
+              <textarea name="Photo Description" id="textareaID" rows="5"></textarea>
               
             </div>
 
@@ -671,6 +731,7 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBDIgfM9PCnLI_koxi20OA2EqB_8yKiu4&callback=initMap">
     </script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 
     <script src="assets/javascript/firebase.js"></script>

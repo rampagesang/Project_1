@@ -119,10 +119,17 @@ li a:hover {
 
 .blog-post-display .post-thumb {
   float: left;
-  padding: 20px;
+  padding: 10px 20px;
 }
 
 
+.padding_top {
+  padding-top: 10px;
+}
+
+.post-title {
+  color: #337ab7;
+}
 
   /*==========================================================*/
 
