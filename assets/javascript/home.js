@@ -182,20 +182,33 @@ function retrieveDatabase(uid) {
 		for(var i = numOfBlogs; i > 0; i--) {
 
 
-			
 
 			whichBlog = i
 
 			database.ref('/user/'+uid).child('blogs').child(i.toString()).once('value', function(value){
 				console.log(value.val())
 				var blogObjectArray = value.val()
-				var title = blogObjectArray.title
+
+				var title
+				if(blogObjectArray.title != null || blogObjectArray.title != undefined){
+					title = blogObjectArray.title
+				}
 				var summary = blogObjectArray.journeyStory
 				var date = blogObjectArray.timestamp
 
 
 
 				var locationObjectArray = value.val().Locations
+
+				var likeCounter
+
+				if(blogObjectArray.likeCounter != null || blogObjectArray.likeCounter != undefined){
+					likeCounter = blogObjectArray.likeCounter.likes
+					//console.log(likeCounter)
+				} else {
+					likeCounter = 0
+				}
+				
 
 				for(var i = 0; i < locationObjectArray.length; i++){
 
@@ -263,11 +276,13 @@ function retrieveDatabase(uid) {
 															.append($('<p>')
 																.attr('id', 'representStory_'+i)
 																.text(summary)))
+														.append($('<hr>'))
 														.append($('<div>')
-															.addClass('post-footer')
-															.append($('<a>')
-																.attr('href','#')
-																.text('Detail'))))))))))
+															.append($('<button>')
+																.addClass('btn btn-sm btn-info')
+																.append($('<span>')
+																	.addClass('glyphicon glyphicon-thumbs-up'))
+																.text(likeCounter+' Likes!'))))))))))
 
 						}
 						

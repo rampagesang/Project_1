@@ -235,26 +235,26 @@
 
 
                   $('#pinModal').modal('show');
-      
-                      $('#modalYes').on('click', function(){
+    
+                  $('#modalYes').on('click', function(event){
 
-                       locationCounter += 1
-                        var marker = new google.maps.Marker({
+                      locationCounter += 1
+                      var marker = new google.maps.Marker({
                         position: markerLocation,
                         map: newMap,
                         title: "Location Property"
                       })
                       markers.push(marker)
 
-                     marker.set('label', locationCounter.toString())
+                      marker.set('label', locationCounter.toString())
 
-                     locationLists.push({lat: lat, long: long})
+                      locationLists.push({lat: lat, long: long})
 
-                     var curLocMap = new google.maps.LatLng(lat,long)
+                      var curLocMap = new google.maps.LatLng(lat,long)
 
-                     mapDrawPolylineCoordinates.push(curLocMap)
+                      mapDrawPolylineCoordinates.push(curLocMap)
 
-                     stopPropagation();
+                      stopPropagation();
 
                    })
 
@@ -465,7 +465,7 @@
                                       journeyStory: journeyStory, 
                                       timestamp: date
                                   })
-                                  database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1)+'likeCounter').push({
+                                  database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1)+'/likeCounter/').set({
                                     likes: 0
                                   })
                                   
@@ -480,7 +480,7 @@
                                     journeyStory: journeyStory, 
                                     timestamp: date
                                 })
-                                database.ref('/user/'+user.uid+"/blogs/" + 1).push({
+                                database.ref('/user/'+user.uid+"/blogs/" + 1 + '/likeCounter/').set({
                                     likes: 0
                                 })
                               }
