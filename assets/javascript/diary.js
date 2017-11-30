@@ -96,6 +96,14 @@ function initMap() {
 
 $(document).ready(function(){
 
+	$('#logoutButton').on('click', function(){
+		firebase.auth().signOut().then(function(){
+			document.location.href = 'Login.html'
+		}).catch(function (error) {
+                     // Handle errors
+                 })
+	})
+
 
 
 	firebase.auth().onAuthStateChanged(function(user){
@@ -104,7 +112,7 @@ $(document).ready(function(){
 				var userObject = snap.val()
 				var userName = userObject.name
 				var userEmail = userObject.email
-				var profilePic = userObject.profilePicture.profile
+				var profilePic
 
 
 				$('#userName').text(userName)
@@ -116,10 +124,11 @@ $(document).ready(function(){
 				$('#userEmailNavBar').text(userEmail)
 
 
-				if (profilePic != undefined || profilePic != null){
-					$('#preview').attr('src', profilePic)
-				} else {
+				if(userObject.profilePicture == undefined){
 					$('#preview').attr('src', "assets/images/default_profile.png")
+				} else {
+					profilePic = userObject.profilePicture.profile
+					$('#preview').attr('src', profilePic)
 				}
 
 
@@ -135,7 +144,7 @@ $(document).ready(function(){
 	firebase.auth().onAuthStateChanged(function(user){
 
 		if(user){
-			retrieveUserInfo(user.uid)
+			//retrieveUserInfo(user.uid)
 			retrieveDatabase(user.uid)
 
 
@@ -198,121 +207,120 @@ function retrieveDatabase(uid) {
 
 
 							for(var i = 0; i < latestBlogObject.Locations.length; i++){
-								
+
 								var locationArray = latestBlogObject.Locations
-								
+
 								var likeCounter
 								var date = latestBlogObject.timestamp
 								var title = latestBlogObject.title
 								var summary = latestBlogObject.journeyStory
-								
-
-								
-							//var likeCounter = latestBlogObject.
 
 
-							var lat = locationArray[i].lat
-							var long = locationArray[i].long
-							var markerLocation = {lat: lat, lng: long}
 
-							var marker = new google.maps.Marker({
-								position: markerLocation,
-								map: map,
-								title: "Location Property"
-							})
-							markers.push(marker)
 
-							marker.set('label', (i+1).toString())
-							var curLocMap = new google.maps.LatLng(lat,long)
-							mapDrawPolylineCoordinates.push(curLocMap)
 
-							if(locationArray[i].photo_1 != null || locationArray[i].photo_1 != undefined){
+								var lat = locationArray[i].lat
+								var long = locationArray[i].long
+								var markerLocation = {lat: lat, lng: long}
 
-								var description_photo1 = locationArray[i].photo_1.description
-								var imgFileURL_photo1 = locationArray[i].photo_1.imgFileURL
+								var marker = new google.maps.Marker({
+									position: markerLocation,
+									map: map,
+									title: "Location Property"
+								})
+								markers.push(marker)
 
-								if(imgFileURL_photo1 != null || imgFileURL_photo1 != undefined){
-									if(isThisFirstPicture != true){
-										isThisFirstPicture = true
-										representativePreviewPicture = imgFileURL_photo1
+								marker.set('label', (i+1).toString())
+								var curLocMap = new google.maps.LatLng(lat,long)
+								mapDrawPolylineCoordinates.push(curLocMap)
 
-										$('#blogs').append($('<hr>'), $('<br>'), $('<div>')
-											.addClass('container')
-											.append($('<div>')
-												.addClass('row')
+								if(locationArray[i].photo_1 != null || locationArray[i].photo_1 != undefined){
+
+									var description_photo1 = locationArray[i].photo_1.description
+									var imgFileURL_photo1 = locationArray[i].photo_1.imgFileURL
+
+									if(imgFileURL_photo1 != null || imgFileURL_photo1 != undefined){
+										if(isThisFirstPicture != true){
+											isThisFirstPicture = true
+											representativePreviewPicture = imgFileURL_photo1
+
+											$('#blogs').append($('<hr>'), $('<br>'), $('<div>')
+												.addClass('container')
 												.append($('<div>')
-													.addClass('col-sm-1'))
-												.append($('<div>')
-													.addClass('col-md-9')
+													.addClass('row')
 													.append($('<div>')
-														.addClass('blog-post-display')
+														.addClass('col-sm-1'))
+													.append($('<div>')
+														.addClass('col-md-9')
 														.append($('<div>')
-															.addClass('posts-wrap')
-															.append($('<article>')
-																.attr('id', i+' blog')
-																.addClass('list-post list-post-b')
-																.append($('<div>')
-																	.addClass('post-thumb')
-																	.append($('<img>')
-																		.attr('id', 'representPic_'+i)
-																		.attr('src', representativePreviewPicture)
-																		.attr('width', '300')
-																		.attr('height', '300')))
-																.append($('<div>')
-																	.addClass('content')
+															.addClass('blog-post-display')
+															.append($('<div>')
+																.addClass('posts-wrap')
+																.append($('<article>')
+																	.attr('id', i+' blog')
+																	.addClass('list-post list-post-b')
 																	.append($('<div>')
-																		.addClass('post-meta')
-																		.addClass('padding_top')
-																		.append($('<time>')
-																			.text(date)))
-																	.append($('<h2>')
-																		.addClass('post-title')
-																		.attr('id', 'representTitle_'+i)
-																		.text(title))
+																		.addClass('post-thumb')
+																		.append($('<img>')
+																			.attr('id', 'representPic_'+i)
+																			.attr('src', representativePreviewPicture)
+																			.attr('width', '300')
+																			.attr('height', '300')))
 																	.append($('<div>')
-																		.addClass('post-content post-excerpt cf')
-																		.append($('<p>')
-																			.attr('id', 'representStory_'+i)
-																			.text(summary)))
-																	.append($('<div>')
-																		.addClass('post-footer')
-																		.append($('<a>')
-																			.attr('href','#')
-																			.text('Detail')))
-																	.append($('<div>')
-																		.append($('<a>')
-																			.addClass('like')
-																			.append($('<i>')
-																				.addClass('glyphicon glyphicon-thumbs-up'))
-																			.text('Like!')
-																			.append($('<input>')
-																				.addClass('qty1')
-																				.attr('name', 'qty1')
-																				.attr('readonly', 'readonly')
-																				.attr('type', 'text')
-																				.attr('value', '0')))))))))))
+																		.addClass('content')
+																		.append($('<div>')
+																			.addClass('post-meta')
+																			.addClass('padding_top')
+																			.append($('<time>')
+																				.text(date)))
+																		.append($('<h2>')
+																			.addClass('post-title')
+																			.attr('id', 'representTitle_'+i)
+																			.text(title))
+																		.append($('<div>')
+																			.addClass('post-content post-excerpt cf')
+																			.append($('<p>')
+																				.attr('id', 'representStory_'+i)
+																				.text(summary)))
+																		.append($('<div>')
+																			.addClass('post-footer')
+																			.append($('<a>')
+																				.attr('href','#')
+																				.text('Detail')))
+																		.append($('<div>')
+																			.append($('<a>')
+																				.addClass('like')
+																				.append($('<i>')
+																					.addClass('glyphicon glyphicon-thumbs-up'))
+																				.text('Like!')
+																				.append($('<input>')
+																					.addClass('qty1')
+																					.attr('name', 'qty1')
+																					.attr('readonly', 'readonly')
+																					.attr('type', 'text')
+																					.attr('value', '0')))))))))))
 
+										}
 									}
 								}
 							}
+							path = new google.maps.Polyline({
+								path: mapDrawPolylineCoordinates,
+								geodesic: true,
+								strokeColor: '#FF0000',
+								strokeOpacity: 1.0,
+								strokeWeight: 2
+							})
+
+							path.setMap(map)
+
+							mapDrawPolylineCoordinates.length = 0
+							isThisFirstPicture = false
+
 						}
-						path = new google.maps.Polyline({
-							path: mapDrawPolylineCoordinates,
-							geodesic: true,
-							strokeColor: '#FF0000',
-							strokeOpacity: 1.0,
-							strokeWeight: 2
-						})
-
-						path.setMap(map)
-
-						mapDrawPolylineCoordinates.length = 0
-						isThisFirstPicture = false
 
 					}
-
-				}
-			})
+				})
 }
 
 })

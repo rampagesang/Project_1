@@ -462,7 +462,7 @@
                                     journeyStory: journeyStory, 
                                     timestamp: date
                                 })
-                                database.ref('/user/'+user.uid+"/blogs/" + 1 + 'likeCounter').push({
+                                database.ref('/user/'+user.uid+"/blogs/" + 1).push({
                                     likes: 0
                                 })
                               }

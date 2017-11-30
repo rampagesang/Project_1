@@ -104,6 +104,14 @@ $('#addJourney').on('click', function(event){
 
 $(document).ready(function(){
 
+	$('#logoutButton').on('click', function(){
+		firebase.auth().signOut().then(function(){
+			document.location.href = 'Login.html'
+		}).catch(function (error) {
+                     // Handle errors
+                 })
+	})
+
 
 
 	firebase.auth().onAuthStateChanged(function(user){
@@ -112,7 +120,7 @@ $(document).ready(function(){
 				var userObject = snap.val()
 				var userName = userObject.name
 				var userEmail = userObject.email
-				var profilePic = userObject.profilePicture.profile
+				var profilePic
 
 
 				$('#userName').text(userName)
@@ -124,10 +132,11 @@ $(document).ready(function(){
 				$('#userEmailNavBar').text(userEmail)
 
 
-				if (profilePic != undefined || profilePic != null){
-					$('#preview').attr('src', profilePic)
-				} else {
+				if(userObject.profilePicture == undefined){
 					$('#preview').attr('src', "assets/images/default_profile.png")
+				} else {
+					profilePic = userObject.profilePicture.profile
+					$('#preview').attr('src', profilePic)
 				}
 
 
