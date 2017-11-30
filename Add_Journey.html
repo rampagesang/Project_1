@@ -60,6 +60,7 @@
           <h1>Spread Your Journey To The World!</h1>
           <p>Extraordinary</p>
         </div>
+
         <div class="modal fade" id="pinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -70,11 +71,11 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  Would you like to add a pin to this location?
+                  Would you like to start adding pin on the map??
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" id="modalYes" data-dismiss="modal">Yes</button>
-                  <button type="button" class="btn btn-primary" id="modalNo" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-danger" id="modalNo" data-dismiss="modal">No</button>
+                  <button type="button" class="btn btn-primary" id="modalYes" data-dismiss="modal">Yes</button>
                 </div>
               </div>
             </div>
@@ -106,6 +107,7 @@
 
               var nameOfJourney
               var journeyStory
+              var isClickable = false
 
               
 
@@ -234,10 +236,13 @@
 
 
 
-                  $('#pinModal').modal('show');
+                    if(isClickable === false){
+                      $('#pinModal').modal('show')
     
-                  $('#modalYes').on('click', function(event){
-
+                      $('#modalYes').on('click', function(event){
+                          isClickable = true
+                      })
+                    } else {
                       locationCounter += 1
                       var marker = new google.maps.Marker({
                         position: markerLocation,
@@ -254,9 +259,11 @@
 
                       mapDrawPolylineCoordinates.push(curLocMap)
 
-                      stopPropagation();
-
-                   })
+                    }
+                  
+                  
+                    
+                    
 
 /*                    if(confirm("Do you want to add a marker on this specific location?")){
                       locationCounter += 1
@@ -532,6 +539,7 @@
                                         $('#nameOfJourney').val('')
                                         $('#textarea1').val('')
                                         $('#locationNum').empty()
+                                        locationCounter = 0
                                         path.setMap(null)
                                         for(var i = 0; i < markers.length; i++){
                                           markers[i].setMap(null)
