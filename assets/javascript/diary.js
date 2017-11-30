@@ -1,6 +1,7 @@
 
 
 var map
+var representBlogOfUserArray = []
 
 
 function initMap() {
@@ -100,54 +101,44 @@ $(document).ready(function(){
 		firebase.auth().signOut().then(function(){
 			document.location.href = 'Login.html'
 		}).catch(function (error) {
-                     // Handle errors
-                 })
+			console.log('There was some problem with log out: '+ error)
+		})
 	})
 
+	$(document).on('click', 'button', function(value){
+		var blogIndex = $(this).val()
+		var blogObject = representBlogOfUserArray[blogIndex]
+		var userKey = blogObject.userKey
+		var whichBlogRep = blogObject.whichBlogIsRepresent
+		var likeCount = blogObject.likes + 1
+
+		$(this).text(likeCount + ' Likes!')
 
 
-	firebase.auth().onAuthStateChanged(function(user){
-		if(user){
-			database.ref('/user/'+user.uid).once('value', function(snap){
-				var userObject = snap.val()
-				var userName = userObject.name
-				var userEmail = userObject.email
-				var profilePic
+		database.ref('/user/'+userKey+'/blogs/'+whichBlogRep).on('value', function(snap){
+			
+			if(snap.hasChild('likeCounter')){
+				console.log('Say Cheese!')
+				database.ref('/user/').child(userKey).child('blogs').child(whichBlogRep).child('likeCounter').update({likes: likeCount})
+			} else {
+				database.ref('/user/').child(userKey).child('blogs').child(whichBlogRep).child('likeCounter').set({likes: likeCount})
+			}
 
-
-				$('#userName').text(userName)
-				$('#mainUserName').text(userName)
-				$('#userEmail').text(userEmail)
-
-				$('#titleUserName').text(userName)
-				$('#userNameNavBar').text(userName)
-				$('#userEmailNavBar').text(userEmail)
-
-
-				if(userObject.profilePicture == undefined){
-					$('#preview').attr('src', "assets/images/default_profile.png")
-				} else {
-					profilePic = userObject.profilePicture.profile
-					$('#preview').attr('src', profilePic)
-				}
+		})
 
 
 
-			})
 
-		} else {
-			document.location.href = 'Login.html'
-		}
-
+		
 	})
+
 
 	firebase.auth().onAuthStateChanged(function(user){
 
 		if(user){
-			//retrieveUserInfo(user.uid)
+
+			retrieveUserInfo(user.uid)
 			retrieveDatabase(user.uid)
-
-
 
 		} else {
 			console.log("The user is not logged-in")
@@ -159,7 +150,33 @@ $(document).ready(function(){
 })
 
 
+
+
 function retrieveUserInfo(uid){
+	database.ref('/user/'+uid).once('value', function(snap){
+		var userObject = snap.val()
+		var userName = userObject.name
+		var userEmail = userObject.email
+		var profilePic
+
+
+		$('#userName').text(userName)
+		$('#mainUserName').text(userName)
+		$('#userEmail').text(userEmail)
+
+		$('#titleUserName').text(userName)
+		$('#userNameNavBar').text(userName)
+		$('#userEmailNavBar').text(userEmail)
+
+
+		if(userObject.profilePicture == undefined){
+			$('#preview').attr('src', "assets/images/default_profile.png")
+		} else {
+			profilePic = userObject.profilePicture.profile
+			$('#preview').attr('src', profilePic)
+		}
+
+	})
 
 
 }
@@ -171,12 +188,14 @@ function retrieveDatabase(uid) {
 	var numOfBlogs = 0
 	var users
 	var userKeyArray = []
-	var whichBlog = 0
+	var whichBlog
 	var representativePreviewPicture
 	var isThisFirstPicture = false
 	var mapDrawPolylineCoordinates = []
 	var markers = []
-
+	var indexes = 0
+	var userUID
+	var counter = 0 
 
 	database.ref('/user/').once('value',function(snapshot){
 
@@ -191,138 +210,160 @@ function retrieveDatabase(uid) {
 			}
 		}
 		
-		for(var i = 0; i < userKeyArray.length; i++){
-			var key = userKeyArray[i]
-			database.ref('/user/'+ key).once('value', function(value){
+		for(var users = 0; users < userKeyArray.length; users++){
+			userUID = userKeyArray[users]
+
+			representBlogOfUserArray.push({
+				index: users,
+				userKey: userUID
+			})
+
+			console.log(representBlogOfUserArray)
+			
+			database.ref('/user/'+ userUID).once('value', function(value){
+				var user_Name = value.val().name
+
 				if(value.hasChild('blogs')){
 
 					if(value.val().blogs.length > 1){
 						var finalBlog = value.val().blogs
+						console.log(finalBlog)
 						var latestBlogObject = finalBlog[finalBlog.length-1]
-						var likeButtonKey = database.ref('/user/'+key+'/blogs/').child((finalBlog.length-1).toString()).child('likeCounter')
-						/*if(latestBlogObject.likeButtonKey.likes != undefined || latestBlogObject.likeButtonKey.likes != null){
-								likeCounter = latestBlogObject.likeButtonKey.likes
-								console.log(likeCounter)
-							}*/
+						console.log(latestBlogObject)
+						whichBlog = (finalBlog.length-1)
+						console.log(whichBlog)
+						
+
+						var likeCounter
+
+						if(latestBlogObject.likeCounter != null || latestBlogObject.likeCounter != undefined){
+							likeCounter = latestBlogObject.likeCounter.likes
+							//console.log(likeCounter)
+						} else {
+							likeCounter = 0
+						}
+						
+						
+						for(var i = 0; i < latestBlogObject.Locations.length; i++){
+
+							var locationArray = latestBlogObject.Locations
+
+							var likeCounter
+							var date = latestBlogObject.timestamp
+							var title = latestBlogObject.title
+							var summary = latestBlogObject.journeyStory
+
+							var lat = locationArray[i].lat
+							var long = locationArray[i].long
+							var markerLocation = {lat: lat, lng: long}
+
+							var marker = new google.maps.Marker({
+								position: markerLocation,
+								map: map,
+								title: "Location Property"
+							})
+							markers.push(marker)
+
+							marker.set('label', (i+1).toString())
+							var curLocMap = new google.maps.LatLng(lat,long)
+							mapDrawPolylineCoordinates.push(curLocMap)
+
+							if(locationArray[i].photo_1 != null || locationArray[i].photo_1 != undefined){
+
+								var description_photo1 = locationArray[i].photo_1.description
+								var imgFileURL_photo1 = locationArray[i].photo_1.imgFileURL
+
+								if(imgFileURL_photo1 != null || imgFileURL_photo1 != undefined){
 
 
-							for(var i = 0; i < latestBlogObject.Locations.length; i++){
+									if(isThisFirstPicture != true){
+										isThisFirstPicture = true
+										representativePreviewPicture = imgFileURL_photo1
+										
+										representBlogOfUserArray[counter].whichBlogIsRepresent = whichBlog
+										representBlogOfUserArray[counter].likes = likeCounter
 
-								var locationArray = latestBlogObject.Locations
-
-								var likeCounter
-								var date = latestBlogObject.timestamp
-								var title = latestBlogObject.title
-								var summary = latestBlogObject.journeyStory
-
-
-
-
-
-								var lat = locationArray[i].lat
-								var long = locationArray[i].long
-								var markerLocation = {lat: lat, lng: long}
-
-								var marker = new google.maps.Marker({
-									position: markerLocation,
-									map: map,
-									title: "Location Property"
-								})
-								markers.push(marker)
-
-								marker.set('label', (i+1).toString())
-								var curLocMap = new google.maps.LatLng(lat,long)
-								mapDrawPolylineCoordinates.push(curLocMap)
-
-								if(locationArray[i].photo_1 != null || locationArray[i].photo_1 != undefined){
-
-									var description_photo1 = locationArray[i].photo_1.description
-									var imgFileURL_photo1 = locationArray[i].photo_1.imgFileURL
-
-									if(imgFileURL_photo1 != null || imgFileURL_photo1 != undefined){
-										if(isThisFirstPicture != true){
-											isThisFirstPicture = true
-											representativePreviewPicture = imgFileURL_photo1
-
-											$('#blogs').append($('<hr>'), $('<br>'), $('<div>')
-												.addClass('container')
+										$('#blogs').append($('<hr>'), $('<br>'), $('<div>')
+											.addClass('container')
+											.append($('<div>')
+												.addClass('row')
 												.append($('<div>')
-													.addClass('row')
+													.addClass('col-sm-1'))
+												.append($('<div>')
+													.addClass('col-md-9')
 													.append($('<div>')
-														.addClass('col-sm-1'))
-													.append($('<div>')
-														.addClass('col-md-9')
+														.addClass('blog-post-display')
 														.append($('<div>')
-															.addClass('blog-post-display')
-															.append($('<div>')
-																.addClass('posts-wrap')
-																.append($('<article>')
-																	.attr('id', i+' blog')
-																	.addClass('list-post list-post-b')
+															.addClass('posts-wrap')
+															.append($('<article>')
+																.attr('id', i+' blog')
+																.addClass('list-post list-post-b')
+																.append($('<div>')
+																	.addClass('post-thumb')
+																	.append($('<img>')
+																		.attr('id', 'representPic_'+i)
+																		.attr('src', representativePreviewPicture)
+																		.attr('width', '300')
+																		.attr('height', '300')))
+																.append($('<div>')
+																	.addClass('content')
 																	.append($('<div>')
-																		.addClass('post-thumb')
-																		.append($('<img>')
-																			.attr('id', 'representPic_'+i)
-																			.attr('src', representativePreviewPicture)
-																			.attr('width', '300')
-																			.attr('height', '300')))
+																		.addClass('post-meta')
+																		.addClass('padding_top')
+																		.append($('<time>')
+																			.text(date)))
+																	.append($('<h2>')
+																		.addClass('post-title')
+																		.text(title))
 																	.append($('<div>')
-																		.addClass('content')
-																		.append($('<div>')
-																			.addClass('post-meta')
-																			.addClass('padding_top')
-																			.append($('<time>')
-																				.text(date)))
-																		.append($('<h2>')
-																			.addClass('post-title')
-																			.attr('id', 'representTitle_'+i)
-																			.text(title))
-																		.append($('<div>')
-																			.addClass('post-content post-excerpt cf')
-																			.append($('<p>')
-																				.attr('id', 'representStory_'+i)
-																				.text(summary)))
-																		.append($('<div>')
-																			.addClass('post-footer')
-																			.append($('<a>')
-																				.attr('href','#')
-																				.text('Detail')))
-																		.append($('<div>')
-																			.append($('<a>')
-																				.addClass('like')
-																				.append($('<i>')
-																					.addClass('glyphicon glyphicon-thumbs-up'))
-																				.text('Like!')
-																				.append($('<input>')
-																					.addClass('qty1')
-																					.attr('name', 'qty1')
-																					.attr('readonly', 'readonly')
-																					.attr('type', 'text')
-																					.attr('value', '0')))))))))))
+																		.addClass('post-content post-excerpt cf')
+																		.append($('<p>')
+																			.text(summary))
+																		.append($('<p>')
+																			.text('By '+user_Name.toUpperCase())))
+																	.append($('<div>')
+																		.addClass('post-footer')
+																		.append($('<a>')
+																			.attr('href','#')
+																			.text('Detail')))
+																	.append($('<hr>'))
+																	.append($('<div>')
+																		.append($('<button>')
+																			.attr('value', counter)
+																			.attr('id', 'likeButton_'+whichBlog.toString())
+																			.addClass('btn btn-sm btn-info')
+																			.append($('<span>')
+																				.addClass('glyphicon glyphicon-thumbs-up'))
+																			.text(likeCounter+' Likes!'))))))))))
 
-										}
+										
+
 									}
 								}
 							}
-							path = new google.maps.Polyline({
-								path: mapDrawPolylineCoordinates,
-								geodesic: true,
-								strokeColor: '#FF0000',
-								strokeOpacity: 1.0,
-								strokeWeight: 2
-							})
-
-							path.setMap(map)
-
-							mapDrawPolylineCoordinates.length = 0
-							isThisFirstPicture = false
-
 						}
+						
+						path = new google.maps.Polyline({
+							path: mapDrawPolylineCoordinates,
+							geodesic: true,
+							strokeColor: '#FF0000',
+							strokeOpacity: 1.0,
+							strokeWeight: 2
+						})
+
+						path.setMap(map)
+
+						mapDrawPolylineCoordinates.length = 0
+						isThisFirstPicture = false
 
 					}
-				})
-}
 
-})
+				}
+				counter += 1
+			})
+			
+		}
+
+	})
 
 }
