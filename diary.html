@@ -21,7 +21,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span> 
               </button>
-              <a href="diary.html" class="navbar-brand">Diary</a>
+              <a href="#" class="navbar-brand">Diary</a>
             </div>
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
@@ -31,6 +31,7 @@
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-user"></span> 
+
                     <strong id='titleUserName'></strong>
                     <span class="glyphicon glyphicon-chevron-down"></span>
                   </a>
@@ -41,7 +42,7 @@
                           <div class="col-lg-4">
                           </div>
                           <div class="col-lg-8">
-                            <p class="text-left" id="userNameNavBar"><strong></strong></p>
+                            <p class="text-left"><strong id="userNameNavBar"></strong></p>
                             <p class="text-left small" id="userEmailNavBar"></p>
                             <p class="text-left">
                               <a href="settings.html" class="btn btn-primary btn-block btn-sm">Update</a>
@@ -70,37 +71,7 @@
         </div>
       </header>
 
-      <!---Profile Picture Section -->
 
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-1">
-          </div>
-          <div class="col-md-10">
-            <div class="top-area">
-              <div class="profile-photo">
-              </div>
-              <!---ACTUAL PROFILE PICTURE UPLOAD AREA -->
-              <button class="profile-btn">
-                <a href="#" class="profile-pic">
-                  <img src="assets/images/default_profile.png" height="128" width="128" id="preview">
-                </a>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!---Profile About Me Section -->
-        <div class="row">
-          <div class="col-sm-1"></div>
-
-          <div class="col-md-10">
-            <div class="section__body">
-              <h1 class="card-section_name" id="mainUserName"></h1>
-            </div>
-          </div>
-        </div>
-
-      </div>
 
       <hr><br>
 
@@ -112,7 +83,7 @@
           <div class="col-md-10">
             <div class="map-area">
 
-                <h3>Places I've Been</h3>
+                <h3>Places Where Everyone Else Has Been</h3>
 
                 <br>
                 <br>
@@ -121,12 +92,7 @@
                   
                 </div>
 
-                
-
-
-                <div class="panel-body">
-                  <button class="btn btn-primary" type="submit" id="addJourney">Add Your Journey</button>
-                </div>
+    
             </div>
           </div>
         </div>
@@ -153,5 +119,5 @@
   <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
 
   <script src="assets/javascript/firebase.js"></script>
-  <script src="assets/javascript/home.js"></script>
+  <script src="assets/javascript/diary.js"></script>
 </html>

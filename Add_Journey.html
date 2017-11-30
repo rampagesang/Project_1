@@ -7,7 +7,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-      <link rel="stylesheet" type="text/css" href="assets/css/journey.css">
+      <link rel="stylesheet" type="text/css" href="assets/css/homestyle.css">
     </head>
 
     <body>
@@ -21,18 +21,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span> 
               </button>
-              <a target="_blank" href="#" class="navbar-brand">Diary</a>
+              <a target="_blank" href="diary.html" class="navbar-brand">Diary</a>
             </div>
             <div class="collapse navbar-collapse">
               <ul class="nav navbar-nav">
-                <li><a href="Add_Journey.html">Map</a></li>
                 <li ><a href="home.html">Profile</a></li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <span class="glyphicon glyphicon-user"></span> 
-                    <strong>  Julia Shin</strong>
+
+                    <strong id='titleUserName'></strong>
                     <span class="glyphicon glyphicon-chevron-down"></span>
                   </a>
                   <ul class="dropdown-menu">
@@ -40,13 +40,10 @@
                       <div class="navbar-login">
                         <div class="row">
                           <div class="col-lg-4">
-                            <p class="text-center">
-                              <span class="glyphicon glyphicon-user icon-size"></span>
-                            </p>
                           </div>
                           <div class="col-lg-8">
-                            <p class="text-left"><strong>Julia Shin</strong></p>
-                            <p class="text-left small">somerandom@email.com</p>
+                            <p class="text-left"><strong id="userNameNavBar"></strong></p>
+                            <p class="text-left small" id="userEmailNavBar"></p>
                             <p class="text-left">
                               <a href="settings.html" class="btn btn-primary btn-block btn-sm">Update</a>
                             </p>
@@ -267,10 +264,40 @@
                 })
               }
 
+
+              $(document).ready(function(){
+
+
+              })
               
               
               $(document).ready(function() {
 
+
+
+                firebase.auth().onAuthStateChanged(function(user){
+                  if(user){
+                    database.ref('/user/'+user.uid).once('value', function(snap){
+                      var userObject = snap.val()
+                      var userName = userObject.name
+                      var userEmail = userObject.email
+
+
+                      $('#userName').text(userName)
+                      $('#mainUserName').text(userName)
+                      $('#userEmail').text(userEmail)
+
+                      $('#titleUserName').text(userName)
+                      $('#userNameNavBar').text(userName)
+                      $('#userEmailNavBar').text(userEmail)
+
+                    })
+
+                  } else {
+                    document.location.href = 'Login.html'
+                  }
+
+                })
 
                 //hide preview photo container when the html loaded
                 $('#addedPhotoContainer').hide()
@@ -409,6 +436,9 @@
 
                                   var numberOfChildren = value.numChildren()
                                   whichBlogNum = numberOfChildren+1
+                                  var likeKey
+
+
 
 
                                   database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1) ).set({
@@ -417,6 +447,10 @@
                                       journeyStory: journeyStory, 
                                       timestamp: date
                                   })
+                                  database.ref('/user/'+user.uid+"/blogs/" + (numberOfChildren+1)+'likeCounter').push({
+                                    likes: 0
+                                  })
+                                  
                                 })
                                 
                               } else {
@@ -427,6 +461,9 @@
                                     title: nameOfJourney,
                                     journeyStory: journeyStory, 
                                     timestamp: date
+                                })
+                                database.ref('/user/'+user.uid+"/blogs/" + 1 + 'likeCounter').push({
+                                    likes: 0
                                 })
                               }
 
@@ -443,16 +480,12 @@
                                 delete locationLists[i].photo_1.imageData
 
                                 howManyUploading += 1
-                                console.log(howManyUploading)
-                                console.log("---------------------------")
                                 uploadImageAsPromise(imageFile, i, user.uid, 1)
 
                                 if(locationLists[i].photo_2 != null || locationLists[i].photo_2 != undefined){
                                   var secondImgFile = locationLists[i].photo_2.imageData
                                   delete locationLists[i].photo_2.imageData
                                   howManyUploading += 1
-                                  console.log(howManyUploading)
-                                  console.log("---------------------------")
                                   uploadImageAsPromise(secondImgFile, i, user.uid, 2)
                                 }
                               }

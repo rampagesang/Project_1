@@ -105,6 +105,43 @@ $('#addJourney').on('click', function(event){
 $(document).ready(function(){
 
 
+
+	firebase.auth().onAuthStateChanged(function(user){
+		if(user){
+			database.ref('/user/'+user.uid).once('value', function(snap){
+				var userObject = snap.val()
+				var userName = userObject.name
+				var userEmail = userObject.email
+				var profilePic = userObject.profilePicture.profile
+
+
+				$('#userName').text(userName)
+				$('#mainUserName').text(userName)
+				$('#userEmail').text(userEmail)
+
+				$('#titleUserName').text(userName)
+				$('#userNameNavBar').text(userName)
+				$('#userEmailNavBar').text(userEmail)
+
+
+				if (profilePic != undefined || profilePic != null){
+					$('#preview').attr('src', profilePic)
+				} else {
+					$('#preview').attr('src', "assets/images/default_profile.png")
+				}
+
+
+
+			})
+
+		} else {
+			document.location.href = 'Login.html'
+		}
+
+	})
+
+
+
 	firebase.auth().onAuthStateChanged(function(user){
 
 		if(user){
@@ -147,10 +184,6 @@ function retrieveDatabase(uid) {
 				var summary = blogObjectArray.journeyStory
 				var date = blogObjectArray.timestamp
 
-				/*$('#representTitle_'+i).text(title)
-				$('#representStory_'+i).text(summary)*/
-
-				
 
 
 				var locationObjectArray = value.val().Locations
@@ -226,17 +259,13 @@ function retrieveDatabase(uid) {
 															.append($('<a>')
 																.attr('href','#')
 																.text('Detail'))))))))))
-							//$('#representPic_'+whichBlog).attr('src', representativePreviewPicture)
+
 						}
 						
-						console.log('photo1_des' + description_photo1)
-						console.log('photo1_url' + imgFileURL_photo1)
 
 						if(locationObjectArray[i].photo_2 != null || locationObjectArray[i].photo_2 != undefined){
 							var description_photo2 = locationObjectArray[i].photo_2.description
 							var imgFileURL_photo2 = locationObjectArray[i].photo_2.imgFileURL
-							console.log('photo2_des' + description_photo2)
-							console.log('photo2_url' + imgFileURL_photo2)
 						}
 					} else {
 
@@ -258,9 +287,5 @@ function retrieveDatabase(uid) {
 
 		}
 	})
-
-
-
-
 
 }

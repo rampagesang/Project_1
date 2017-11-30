@@ -1,15 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed);
 
 body {
-
-/*  background-image: url(images/road.jpg);*/
+  background-image: url();
   background-repeat: no-repeat;
   background-position: center top;
   background-attachment: fixed;
-  width: 100%;
-  font-family: 'Barlow Semi Condensed', sans-serif;;
-  -webkit-font-smoothing: antialiased;
-
 }
 
 h1, h2, h3 {
@@ -23,32 +18,26 @@ background-color: #333333;
 
 }
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+.navbar-nav li a:hover, .navbar-nav li.active a {
+  color: #3379b7 !important;
 }
 
-li {
-    float: right;
+.col-lg-8 {
+    width: auto;
 }
 
-li a {
-    display: block;
-    color: white;
+.dropdown-menu{
+  min-width: 200px;
+}
+
+.row {
+    margin-right: 13px;
+    margin-left: 13px;
+}
+
+.text-left {
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
 }
-
-li a:hover {
-    background-color: #111;
-}
-
-/*.search-bar {
-  float: left;
-}*/
 
 .top-area {
   margin: 0 auto 100px;
@@ -57,8 +46,6 @@ li a:hover {
   padding: 50px 0 0 0;
   height: 120px;
 }
-
-
 
 .profile-btn {
   border-radius: 50%;
@@ -82,7 +69,7 @@ li a:hover {
     z-index: 1;
 }
 
-.photo {
+#preview {
   border-radius: 50%;
 }
 
@@ -139,9 +126,6 @@ li a:hover {
   right: 260px;
 }
 
-
-
-
 .inputfile {
   width: 0.1px;
   height: 0.1px;
@@ -151,4 +135,65 @@ li a:hover {
   display: none;
 }
 
+
+.jumbotron {
+  background-color: white;
+  color: black;
+}
+
+
+.panel-default {
+  border-color: #ddd;
+  border-width: 2px;
+}
+
+.panel-default>.panel-heading {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+
+.backgroundColorPaint{
+  background-color: #f5f5f5;
+  text-align: center;
+  padding: 10px;
+}
+
+#map_editing {
+  height: 400px;
+  width: 100%;
+}
+
+#gettingImgFile {
+  text-align: center;
+}
+
+textarea{
+  overflow: hidden;
+  display:block;
+  width: auto;
+  width: 100%;
+  resize: none;
+}
+
+#finalButton{
+  margin: 30px;
+  
+}
+
+.loader {
+    border-top: 16px solid blue;
+  border-right: 16px solid green;
+  border-bottom: 16px solid red;
+  border-left: 16px solid yellow;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
