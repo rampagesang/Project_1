@@ -1,3 +1,4 @@
+  background-attachment: fixed;
 @import url(https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed);
 
 body {
@@ -17,10 +18,15 @@ height: 50px;
 background-color: #333333;
 
 }
+hr {
+  height: 8px;
+  width: 60%;
+}
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
   color: #3379b7 !important;
 }
+
 
 .col-lg-8 {
     width: auto;
@@ -54,23 +60,20 @@ background-color: #333333;
 }
 
 .profile-pic {
-  border-radius: 50%;
-  height: 150px;
-  width: 150px;
-  background-size: cover;
+  position:absolute;
+  top:-30px;
+  height: 180px;
+  width: 160px;
   background-position: center;
   background-blend-mode: multiply;
   vertical-align: middle;
-  text-align: center;
-  color: transparent;
-  transition: all .3s ease;
   text-decoration: none;
   position: relative;
-    z-index: 1;
+  z-index: 1;
 }
 
 #preview {
-  border-radius: 50%;
+  border-radius: 90%;
 }
 
 .section__body {

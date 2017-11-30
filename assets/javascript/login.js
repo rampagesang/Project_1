@@ -1,11 +1,5 @@
 
 
-// toggle between login and signup
-$('.message a').click(function(){
-  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-});
-
-
 // login in button clicked!
 $('#loginButton').on('click', function(event){
 

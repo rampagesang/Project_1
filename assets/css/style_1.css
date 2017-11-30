@@ -1,9 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 body {
-    background-image: url(images/road.jpg);
+    background-image: url(images/road_copy.jpg);
     background-repeat: no-repeat;
-    background-position: center top;
+    background-position: center;
     background-attachment: fixed;
+    background-size: cover;
 }
 
 .logo {
@@ -50,10 +51,12 @@ body {
   z-index: 1;
   background: #212121;
   border-radius: 10px;
-  max-width: 600px;
+  max-width: 900px;
   margin: 0 auto 100px;
   padding: 32px;
   text-align: center;
+  left: -45px;
+  width: 400px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input {
@@ -102,7 +105,6 @@ body {
 }
 .form .register-form {
   display: none;
-
 }
 .container {
   position: relative;
@@ -137,6 +139,3 @@ body {
 .container .info span .fa {
   color: #EF3B3A;
 }
-
-
-
