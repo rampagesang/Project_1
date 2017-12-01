@@ -2,6 +2,7 @@
 
 var map
 var representBlogOfUserArray = []
+var isFirstBlogLocation = false
 
 
 function initMap() {
@@ -126,12 +127,28 @@ $(document).ready(function(){
 
 		})
 
-
-
-
-		
 	})
 
+
+	$(document).on('click', 'a', function(value){
+		console.log($(this).attr('value'))
+		var userKeyIndex = $(this).attr('value')
+		var blogObject = representBlogOfUserArray[userKeyIndex]
+		var userKey = blogObject.userKey
+		var whichBlogRep = blogObject.whichBlogIsRepresent
+
+		var detailObject = {
+			userKey: userKey,
+			whichBlog: whichBlogRep
+		}
+
+		var myJSONObject = JSON.stringify(detailObject)
+		localStorage.setItem('blog', myJSONObject)
+		console.log(myJSONObject)
+
+		document.location.href = "detail.html"
+
+	})
 
 	firebase.auth().onAuthStateChanged(function(user){
 
@@ -257,6 +274,12 @@ function retrieveDatabase(uid) {
 							var long = locationArray[i].long
 							var markerLocation = {lat: lat, lng: long}
 
+							if(isFirstBlogLocation === false){
+								isFirstMarker = true
+                        		map.setZoom(12)
+                        		map.panTo(markerLocation)
+							}
+
 							var marker = new google.maps.Marker({
 								position: markerLocation,
 								map: map,
@@ -324,7 +347,7 @@ function retrieveDatabase(uid) {
 																	.append($('<div>')
 																		.addClass('post-footer')
 																		.append($('<a>')
-																			.attr('href','#')
+																			.attr('value', counter)
 																			.text('Detail')))
 																	.append($('<hr>'))
 																	.append($('<div>')

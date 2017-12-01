@@ -109,7 +109,7 @@ $(document).ready(function(){
 			document.location.href = 'Login.html'
 		}).catch(function (error) {
                      // Handle errors
-                 })
+        })
 	})
 
 
@@ -208,7 +208,7 @@ function retrieveDatabase(uid) {
 				} else {
 					likeCounter = 0
 				}
-				
+
 
 				for(var i = 0; i < locationObjectArray.length; i++){
 
@@ -278,11 +278,8 @@ function retrieveDatabase(uid) {
 																.text(summary)))
 														.append($('<hr>'))
 														.append($('<div>')
-															.append($('<button>')
-																.addClass('btn btn-sm btn-info')
-																.append($('<span>')
-																	.addClass('glyphicon glyphicon-thumbs-up'))
-																.text(likeCounter+' Likes!'))))))))))
+															.text(' '+likeCounter+' Likes!')
+															.addClass('redness')))))))))
 
 						}
 						

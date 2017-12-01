@@ -203,5 +203,13 @@ textarea{
     100% { transform: rotate(360deg); }
 }
 
+.redness {
+  color: red;
+}
 
+
+.panel_width {
+  width: 80%;
+  margin: auto;
+}
 

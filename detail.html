@@ -51,58 +51,56 @@
       </div>
     </div>
   </header>
-<!---Profile Picture Section -->
-<div class="container">
-  <div class="row">
-    <div class="col-sm-1">
-    </div>
-    <div class="col-md-10">
-      <div class="top-area">
-        <div class="profile-photo">
-        </div>
-        <!---ACTUAL PROFILE PICTURE UPLOAD AREA -->
-        <a href="#" class="profile-pic">
-          <img src="assets/images/default_profile.png" height="155" width="140" id="preview">
-        </a>
-      </div>
-    </div>
-  </div>
-  <!---Profile About Me Section -->
-  <div class="row">
-    <div class="col-sm-1"></div>
 
-    <div class="col-md-10">
-      <div class="section__body">
-        <h1 class="card-section_name" id="mainUserName"></h1>
+  <!---Google Maps Section -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-1">
       </div>
-    </div>
-  </div>
-</div>
-<hr>
-<!---Google Maps Section -->
-<div class="container">
-  <div class="row">
-    <div class="col-sm-1">
-    </div>
-    <div class="col-md-10">
-      <div class="map-area">
-        <h3>Places I've Been</h3>
-        <br>
-        <div id="map">
+      <div class="col-md-10">
+        <div class="map-area">
+          <h3 id="titleOfJourney"></h3>
+          <br>
+          <div id="map">
+
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- +++++++++++++++++++++++++++++++ BLOG POSTS START HERE ++++++++++++++++++++++++++++++ -->
-<div id="blogs">
-</div>
+  <!-- +++++++++++++++++++++++++++++++ BLOG POSTS START HERE ++++++++++++++++++++++++++++++ -->
+    <br>
+    <hr>
+    <br>
 
-</body>
-<!-- <script src="https://code.jquery.com/jquery.js"></script> --> 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBDIgfM9PCnLI_koxi20OA2EqB_8yKiu4&callback=initMap"></script>
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
-<script src="assets/javascript/firebase.js"></script>
-<script src="assets/javascript/home.js"></script>
-</html>
+    <div class="panel panel-default panel_width">
+      <div class="panel-heading">
+        <h3 class="panel-title text-center">
+          Story of This Journey
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p id="story">
+          story
+        </p>
+      </div>
+
+    </div>
+
+    <hr>
+
+    <div class="panel panel-default panel_width" id="addedPhotoContainer">
+      <div class="panel-heading">
+        <h3 class="panel-title text-center">Photo Library</h3>
+      </div>
+      <div class="panel-body" id="previewOfAddedPhotoContainer">
+      </div>
+    </div>
+
+    </body>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBDIgfM9PCnLI_koxi20OA2EqB_8yKiu4&callback=initMap"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script src="assets/javascript/firebase.js"></script>
+    <script src="assets/javascript/detail.js"></script>
+  </html>
