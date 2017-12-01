@@ -1,7 +1,7 @@
 
 
 var map
-
+var isFirstLocation = false
 
 function initMap() {
     // Styles a map in night mode.
@@ -222,6 +222,12 @@ function retrieveDatabase(uid) {
 						title: "Location Property"
 					})
 					//markers.push(marker)
+
+					if(isFirstLocation === false){
+						isFirstLocation = true
+                        map.setZoom(12)
+                        map.panTo(markerLocation)
+					}
 
 					marker.set('label', (i+1).toString())
 					var curLocMap = new google.maps.LatLng(lat,long)
